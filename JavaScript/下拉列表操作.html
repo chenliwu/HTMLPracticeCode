@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src="js/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+	<select name="select" id="city">
+		<option value="">请选择城市</option>
+		<option value="hz">贺州</option>
+		<option value="sz">深圳</option>
+	</select>
+	<input id="btnTest" type="button" value="判断是否选中">
+	<script>
+		$(function(){
+			$("#btnTest").click(function(){
+				//$("#city").val("sz");//选择城市
+				//选中就好输出对应的value值
+				alert($("#city :selected").val());
+			});
+		});
+	</script>
+</body>
+</html>

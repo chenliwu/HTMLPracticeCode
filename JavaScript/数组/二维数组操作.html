@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>二维数组操作</title>
+    <script src="../js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+
+
+    <script>
+
+        /**
+         * 附件属性二维数组，[字段名称，显示附件名称的标签id]
+         */
+        var attachmentGrid = [
+            ["businLicenceId", "showBusinLicenceId"]
+        ];
+
+        var json = {};
+        json.businLicenceId = businLicenceId;
+        json.fileName = "123";
+
+        $(function () {
+            for (var i = 0; i < attachmentGrid.length; i++) {
+                console.log(attachmentGrid[i][0]+","+attachmentGrid[i][1]);
+            }
+            if(json[attachmentGrid[0][0]] == attachmentGrid[0][0]){
+                console.log()
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

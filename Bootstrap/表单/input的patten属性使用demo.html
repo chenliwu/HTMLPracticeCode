@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+
+    <title>input的patten属性使用demo</title>
+</head>
+
+<body>
+
+    <form action="#">
+
+        <div class="form-group">
+            <label>中国身份证号码</label>
+            <input type="text" class="form-control" id="inputIDCard" title="中国身份证号码（15位/18位）" pattern="[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]|[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}[0-9Xx]"
+                required placeholder="中国身份证号码">
+        </div>
+
+        <div class="form-group">
+            <label>银行账号</label>
+            <input type="text" class="form-control" id="inputBankCard" title="银行账号（纯数字）" pattern="[1-9]\d{1,29}" required placeholder="银行账号">
+        </div>
+
+
+
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="email" class="form-control" id="inputEmail1" title="邮箱地址" required placeholder="Email">
+        </div>
+
+        <div class="form-group">
+                <label>国内电话号码（加区号）</label>
+                <input type="text" class="form-control" id="inputPhone" title="国内电话号码（加区号））" pattern="\d{3}-\d{8}|\d{4}-\d{7}" required placeholder="国内电话号码（加区号）">
+            </div>
+
+        <div class="form-group">
+            <label>手机号码</label>
+            <input type="text" class="form-control" id="inputMobilePhone" title="手机号码（11位数字）" pattern="1(3|5|8|7)\d{9}" required placeholder="手机号码（11位数字）">
+        </div>
+
+        <div class="form-group">
+            <label>邮政编码</label>
+            <!-- 
+                input的type为number时，pattern属性不起作用。
+            -->
+            <input type="text" class="form-control" id="exampleInputEmail1" title="邮政编码（6位数字）" pattern="[0-9]{6}" required placeholder="邮政编码">
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+</body>
+
+</html>

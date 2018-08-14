@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <title>表单判空</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="text" name="username" placeholder="username">
+        <select name="university" id="select">
+            <option value="">请选择学校</option>
+            <option value="hzxy">贺州学院</option>
+        </select>
+    </form>
+    <button id="btnTest">测试</button>
+
+    <script>
+        $(function () {
+            $("#btnTest").click(function () {
+                var data = $('form').serializeObject();
+                alert(data.username+","+data.university);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

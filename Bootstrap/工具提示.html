@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>工具提示</title>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="tooltip top" role="tooltip">
+        <div class="tooltip-arrow"></div>
+        <div class="tooltip-inner">
+            Some tooltip text!
+        </div>
+    </div>
+
+    <!-- <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+
+    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+
+    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+
+    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button> -->
+
+    <br>
+    <br>
+    <br>
+    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="查看详情"></span>
+
+    <span class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="修改信息"></span>
+
+    <span class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="用户列表"></span>
+
+    <span class="glyphicon glyphicon-th-list" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="账户列表"></span>
+
+    <span class=" glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除客户"></span>
+
+    <span class="glyphicon glyphicon-cog" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="配置"></span>
+   
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+</body>
+
+</html>

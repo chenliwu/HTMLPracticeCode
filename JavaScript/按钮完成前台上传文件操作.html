@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>按钮完成前台上传文件操作</title>
+    <script src="js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+    <form id="signupListImportForm" class="import-file-form" enctype="multipart/form-data">
+        <input type="file" name="excelFile" id="excelFile" style="display:none" onchange="fileUpload()"> 
+        <input class="btn-dr" type="button" value="导入" onclick="selectFile()">
+    </form>
+
+    <script>
+
+        //打开文件选择框
+        function selectFile() {
+            $("#excelFile").trigger("click");
+        }
+
+
+        //文件上传
+        function fileUpload() {
+            alert("文件上传");
+            // var option = {
+            //     url: "analyzeXml",//这里写你的url
+            //     type: 'POST',
+            //     datatype: 'json',//这里是返回类型，一般是json,text
+            //     clearForm: true,//提交后是否清空
+            //     success: function (map) {
+            //         alert("上传" + map.message + "!");
+            //     },
+            //     error: function (data) {
+            //         alert("页面请求失败！");
+            //     }
+            // };
+            // $("#signupListImportForm").ajaxSubmit(option);
+            // return false;
+        }
+
+    </script>
+
+
+</body>
+
+</html>

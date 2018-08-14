@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>正则表达式</title>
+    <script src="js/jquery-2.1.0.min.js"></script>
+</head>
+
+
+<input id="zipcode" type="text" placeholder="邮政编码">
+
+<button id="btnTest">测试正则表达式</button>
+
+<body>
+    
+    <script>
+        $(function(){
+            $("#btnTest").click(function(){
+                var zipcode = $("#zipcode").val();
+                alert(new RegExp(/^\d{6}$/).test(zipcode));
+            });
+        });
+    </script>
+</body>
+</html>

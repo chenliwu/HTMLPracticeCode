@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>校验状态</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="../js/jquery-2.1.0.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+</head>
+<body>
+    <!-- 
+        给Input组件添加校验状态应该在包裹input组件的父级元素（如DIV）添加对应的类属性。例如：
+        //移除成功提示，加上错误提示
+        if( $("#operCodeElement").parent().hasClass("has-success")){
+            $("#operCodeElement").parent().removeClass("has-success");
+        }
+        //移除错误提示，加上成功提示
+        $("#operCodeElement").parent().addClass("has-error");
+         if($("#operCodeElement").parent().hasClass("has-error")){
+            $("#operCodeElement").parent().removeClass("has-error");
+        }
+        $("#operCodeElement").parent().addClass("has-success");
+     -->
+    <div class="form-group has-success">
+        <label class="control-label" for="inputSuccess1">Input with success</label>
+        <input type="text" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2">
+        <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+      </div>
+      <div class="form-group has-warning">
+        <label class="control-label" for="inputWarning1">Input with warning</label>
+        <input type="text" class="form-control" id="inputWarning1">
+      </div>
+      <div class="form-group has-error">
+        <label class="control-label" for="inputError1">Input with error</label>
+        <input type="text" class="form-control" id="inputError1">
+      </div>
+      <div class="has-success">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="checkboxSuccess" value="option1">
+            Checkbox with success
+          </label>
+        </div>
+      </div>
+      <div class="has-warning">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="checkboxWarning" value="option1">
+            Checkbox with warning
+          </label>
+        </div>
+      </div>
+      <div class="has-error">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="checkboxError" value="option1">
+            Checkbox with error
+          </label>
+        </div>
+      </div>
+</body>
+</html>
