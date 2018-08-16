@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>test</title>
-	<script src="js/jquery-2.1.0.min.js"></script>
+	<script src="../js/jquery-2.1.0.min.js"></script>
 </head>
 <body>
 	<select name="select" id="city">
@@ -19,6 +19,12 @@
 				//选中就好输出对应的value值
 				alert($("#city :selected").val());
 			});
+
+			//监听选择的改变
+			$("#city").change(function(){
+				alert($("#city").val());
+			});
+
 		});
 	</script>
 </body>

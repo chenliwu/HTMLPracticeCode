@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQ获取DOM宽高</title>
+    <script src="js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+    <div id="keleyi_com" style="width:800px;border:1px solid silver">本DIV的id为keleyi_com;
+        <br />为欢迎访问柯乐义http://www.keleyi.com</div>
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                alert("id为keleyi_com的width为：" + $("#keleyi_com").width());
+            }
+        )
+    </script>
+</body>
+
+</html>

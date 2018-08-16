@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>页面宽度和高度设置</title>
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <style>
+        .content{
+            width: 300px;
+            height: 300px;
+            background:red;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+
+    </div>
+
+    <button id="setWidth">设置DIV宽度</button>
+    <div>
+        screen对象常用属性如下
+        <div id="showScreen">
+
+        </div>
+    </div>
+    <div></div>
+
+    <script>
+    
+        $(function(){
+            console.log("DIV宽度："+$(".content").width());
+            console.log("DIV高度："+$(".content").height());
+            $("#setWidth").click(function(){
+                $(".content").width(500);
+            });
+
+            var showScreen = "";
+            showScreen += "窗口可以使用的屏幕宽度，单位像素:"+screen.availWidth+"<br>";
+            showScreen += "窗口可以使用的屏幕高度，单位像素（不带任务栏）:"+screen.availHeight+"<br>";
+            showScreen += "显示器屏幕的宽度:"+screen.width+"<br>";
+            showScreen += "显示器屏幕的高度（带任务栏）:"+screen.height+"<br>";
+            $("#showScreen").html(showScreen);
+        });
+    </script>
+</body>
+</html>
