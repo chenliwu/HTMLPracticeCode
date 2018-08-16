@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <title>自定义弹出框</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        /* 子相父绝，margin实现居中显示 */
+        div.modal-container{
+            width: 400px ;
+            height: 500px;
+            background-color: royalblue;
+            text-align: center;
+            position: relative;
+        }
+        div.modal-head{
+            color: white;
+        }
+        div.modal-content{
+            position: relative;
+            margin: auto;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <button id="show">显示modal</button>
+    <button id="hide">隐藏modal</button>
+    <div id="mymodal" class="modal-container">
+        <div class="modal-head">
+            <h3>标题</h3>
+        </div>
+        <div class="modal-content">
+            内容
+        </div>
+    </div>
+
+<script>
+    $(function(){
+        $("#mymodal").hide();
+
+
+        $("#show").click(function(){
+            $("#mymodal").fadeIn(1000);
+        });
+
+        $("#hide").click(function(){
+            //$("#mymodal").fadeOut(1000);
+            $("#mymodal").hide();
+        });
+
+    })
+</script>
+
+</body>
+</html>
