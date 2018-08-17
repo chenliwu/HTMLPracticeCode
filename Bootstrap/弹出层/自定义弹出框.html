@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义弹出框</title>
+
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="../js/jquery-2.1.0.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+        
+        #btnTest{
+            z-index: 995;
+        }
+
+        #temp {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 99;
+        }
+
+        .my-modal-dialog {
+            margin: 0px auto;
+            width: 700px;
+            height: 595px;
+            z-index: 999;
+            /* background:#DCDBDC;
+            -moz-opacity: 0.8; */
+            /* border: 1px solid #f44b24; */
+        }
+
+        .my-modal-header,
+        .my-modal-header h4 {
+            line-height: 96px;
+            height: 96px;
+            color: #ffffff;
+            font-style: 18px;
+            text-align: center;
+        }
+
+        .my-modal-header {
+            background-image: url(../images/bg_datanchuangkuang.png);
+            background-repeat: no-repeat;
+            height: 96px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="btnTest">弹出层</button>
+    <div id="temp"></div>
+    <div class="" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="my-modal-dialog modal-dialog">
+            <div class="my-modal-content">
+                <div class="my-modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="my-modal-title" id="myModalLabel">添加银行账户信息</h4>
+                </div>
+                <div class="my-modal-body">
+
+
+                </div>
+                <div class="my-modal-footer ">
+                    <div class="col-sm-12 text-center">
+                        <button type="button" class="btn btn-default">
+                            确定</button>
+                        <button type="button" id="btn_submit" class="btn btn-primary">
+                            取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(function () {
+
+            $('#myModal').hide();
+            $('#temp').hide();
+
+            $("#btnTest").click(function () {
+
+                document.getElementById("temp").style.visibility = "visible";
+                $("#myModalLabel").text("添加银行账户信息");
+                //$('#myModal').modal();
+                $('#myModal').fadeIn();
+            });
+        });
+
+    </script>
+
+
+</body>
+
+</html>
