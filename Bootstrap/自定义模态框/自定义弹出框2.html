@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义弹出框2</title>
+
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="../js/jquery-2.1.0.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        .dialog-container {
+            margin: 0px auto;
+            width: 700px;
+            height: 595px;
+            border: 1px solid red;
+            border-radius: 7px;
+        }
+
+        .dialog-head-container {
+            background-image: url(./images/bg_datanchuangkuang.png);
+            background-repeat: no-repeat;
+            height: 96px;
+            line-height: 80px;
+            
+        }
+
+
+        /* 关闭图标 */
+        .icon-close-dialog {
+            width: 17px;
+            height: 17px;
+            float: right;
+            margin: 10px 10px 0px 0px;
+        }
+
+        .icon-close-dialog:hover {
+            cursor: pointer;
+        }
+
+        /* 标题 */
+        .dialog-head {
+            margin: 0px auto;
+            margin-left: 20px;
+            color: #ffffff;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .dialog-body-scrollbar-container{
+            margin: 0px 10px 0px 12px;
+        }
+
+        /* 主体容器 */
+        .dialog-body-container {
+            margin: 0 auto;
+            overflow: auto;
+            width: 100%;
+            height: 420px;
+        }
+
+        /**********************************************************************************/
+        .dialog-body-container::-webkit-scrollbar {
+            width: 7px;
+            height: 10px;
+        }
+        .dialog-body-container::-webkit-scrollbar-track {
+            /*外层轨道，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置3）*/
+            /* background: #FF66D5; */
+        }
+
+        .dialog-body-container::-webkit-scrollbar-track-piece {
+            /*内层轨道，滚动条中间部分（位置4）*/
+            /* background: #FF66D5; */
+           
+        }
+
+        .dialog-body-container::-webkit-scrollbar-thumb {
+            /*滚动条里面可以拖动的那部分（位置5）*/
+            background: rgb(167, 166, 165);
+            border-radius: 4px;
+        }
+
+        .dialog-body-container::-webkit-scrollbar-corner {
+            /*边角（位置6）*/
+            /* background: #82AFFF; */
+        }
+
+        .dialog-body-container::-webkit-scrollbar-resizer {
+            /*定义右下角拖动块的样式（位置7）*/
+            /* background: #FF0BEE; */
+        }
+        /**********************************************************************************/
+
+
+
+        .dialog-body-content-container {
+            margin: 20px 10px 0px 12px;
+            /* margin-top: 20px;
+            margin-left: 12px;
+            margin-right: 10px; */
+        }
+
+        .dialog-body-content-head {
+            /* font-size: 14px;
+            font-weight: bold;
+            color: #141212; */
+            /* background-color: blue; */
+            /* flexbox弹性布局，实现居中 */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .dialog-body-content-head span {
+            margin: 0px 10px 0px 0px;
+            display: inline-block;
+            width: 3px;
+            height: 18px;
+            background-color: #f44b24;
+        }
+
+        .dialog-body-content-body{
+            margin: 20px 0px 0px 0px;
+        }
+
+        .dialog-body-content-table {
+            margin: 0 auto;
+        }
+
+        .dialog-body-content-table tr {
+            
+        }
+
+        .dialog-body-content-table tr td {}
+
+        .dialog-body-content-table tr td * {
+            font-size: 14px;
+            color: #A7ACB7;
+            margin: 0px 20px 0px 0px;
+            
+        }
+        .dialog-body-content-table tr td *:focus{
+            border: 1px solid #f44b24;
+            outline: none;
+            padding: 1px;
+        }
+
+        .td-title {
+            text-align: right;
+        }
+        .td-hint {
+            text-align: right;
+        }
+
+        /* 公共标题文字样式 */
+        .dialog-common-title-text{
+            font-size: 14px;
+            font-weight: bold;
+            color: #141212;
+        }
+        
+        /* 公用提示文字样式 */
+        .dialog-common-input-hint-text{
+            font-size: 14px;
+            color: #525243;
+        }
+
+
+
+
+        .dialog-attachment-table *{
+            /* border: 1px solid #A7ACB7; */
+
+        }
+        .dialog-attachment-table thead tr{
+            /* height: 40px; */
+        }
+        .dialog-attachment-table thead tr td{
+           
+        }
+
+
+
+
+        
+
+        /* 尾部容器 */
+        .dialog-footer-container {
+            margin: 0px auto;
+            height: 80px;
+            /* flexbox弹性布局，实现居中 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dialog-footer {
+            text-align: center;
+        }
+
+        .dialog-footer * {
+            margin: 0px 25px 0px 25px;
+        }
+
+        /* 主色按钮 */
+        .btn-customer-primary,
+        .btn-customer-primary:visited,
+        .btn-customer-primary:active,
+        .btn-customer-primary:link {
+            display: inline-block;
+            width: 110px;
+            height: 40px;
+            line-height: 40px; 
+            text-align: center;   
+            font-size: 16px;   
+            color: #ffffff;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background-color: #f44b24;
+            text-decoration: none;
+            transition: 0.5s;
+        }
+
+        .btn-customer-primary:hover {
+            background: rgba(177, 13, 13, 0.9);
+        }
+
+        /* 默认按钮 */
+        .btn-customer-default,
+        .btn-customer-default:visited,
+        .btn-customer-default:active,
+        .btn-customer-default:link {
+            display: inline-block;
+            width: 110px;
+            height: 40px;
+            line-height: 40px;  
+            text-align: center;  
+            font-size: 16px;   
+            color: #f44b24;
+            border: 1px solid #f44b24;
+            border-radius: 10px;
+            background-color: #ffffff;
+            text-decoration: none;
+        }
+
+        .btn-customer-default:hover {
+            background: rgba(238, 230, 238, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="btnShow">显示模态框</button>
+    <button id="btnClose">关闭模态框</button>
+
+    <button class="open-modal">测试打开模态框1</button>
+
+    <div id="addDialog" class="dialog-container">
+        <div class="dialog-head-container">
+            <img src="./images/icon-delete.png" class="icon-close-dialog close-dialog">
+            <div class="dialog-head">
+                模态框标题
+            </div>
+        </div>
+        <div class="dialog-body-container">
+
+            <div class="dialog-body-scrollbar-container">
+                
+            </div>
+            <div class="dialog-body-content-container">
+
+                <div class="dialog-body-content-head dialog-common-title-text">
+                    <span></span>
+                    内容标题
+                </div>
+
+                <div class="dialog-body-content-body">
+                    <table class="dialog-body-content-table" >
+                        <tr class="h50">
+                            <td class="td-hint">银行账户名：</td>
+                            <td>
+                                <input class="w180 h30" type="text" placeholder="">
+                            </td>
+                            <td class="td-hint"> 银行账户：</td>
+                            <td>
+                                <input class="w180 h30" type="text" placeholder=" ">
+                            </td>
+                        </tr>
+                        <tr class="h50">
+                            <td class="td-hint">所属银行：</td>
+                            <td>
+                                <select class="w180 h30" type="text" placeholder="">
+                                    <option value="">所属银行</option>
+                                </select>
+                            </td>
+                            <td class="td-hint"> 开户银行（全称）：</td>
+                            <td>
+                                <input class="w180 h30" type="text" placeholder="">
+                            </td>
+                        </tr>
+                        <tr class="h50">
+                            <td class="td-hint">企业代码：</td>
+                            <td>
+                                <input type="text" class="w180 h30" placeholder="">
+                            </td>
+                            <td class="td-hint"> 企业名称：</td>
+                            <td>
+                                <select class="w180 h30" type="text" placeholder="">
+                                    <option value="">企业名称</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="h50">
+                            <td class="td-hint">开户行所在地：</td>
+                            <td>
+                                <select class="w100 h30" name="privince" id="">
+                                    <option value="">省份</option>
+                                </select>
+                                <select class="w100 h30" name="city" id="">
+                                    <option value="">城市</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="dialog-body-content-container">
+
+                <div class="dialog-body-content-head dialog-common-title-text">
+                    <span></span>
+                    内容标题
+                </div>
+
+                <div class="dialog-body-content-body">
+                    <a href="javascript:void(0);" class="btn-customer-primary mb20">新增附件</a>
+                    <table class="dialog-body-content-table table table-bordered" >
+                        <thead class="text-center">
+                            <tr>
+                                <td  class="dialog-common-title-text" 
+                                        style="background-color: #FFF4F2">附件类型</td>
+                                <td class="dialog-common-title-text"
+                                        style="background-color: #FFF4F2">附件名称</td>
+                                <td class="dialog-common-title-text"
+                                        style="background-color: #FFF4F2">操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="dialog-footer-container">
+            <div class="dialog-footer">
+                <a href="javascript:void(0);" class="btn-customer-primary close-dialog">确定</a>
+                <a href="javascript:void(0);" class="btn-customer-default close-dialog">取消</a>
+                <!-- <button class="btn-customer-primary">确定</button>
+                <button class="btn-customer-default">取消</button> -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(function () {
+            //$("#addDialog").hide();
+
+            initDialog("addDialog");
+
+            $("#btnShow").click(function () {
+                $("#addDialog").fadeIn();
+            });
+
+            $("#btnClose").click(function () {
+                $("#addDialog").fadeOut();
+            });
+
+        });
+
+        function initDialog(dialogId) {
+            var close = $(".close-dialog");
+            if (close) {
+                close.click(function () {
+                    var dialog = $("#" + dialogId);
+                    if (dialog) {
+                        dialog.fadeOut();
+                    }
+                });
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

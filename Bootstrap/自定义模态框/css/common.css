@@ -1,0 +1,60 @@
+.w100{
+    width: 100px;
+}
+.w180{
+    width: 180px;
+}
+
+
+
+.h30{
+    height: 30px;
+}
+.h40{
+    height: 40px;
+}
+.h50{
+    height: 50px;
+}
+
+
+.pt10{
+    padding-top: 10px;
+}
+.pt20{
+    padding-top: 20px;
+}
+.pt30{
+    padding-top: 30px;
+}
+.pt40{
+    padding-top: 40px;
+}
+.pr10{
+    padding-right: 10px;
+}
+.pr20{
+    padding-right: 20px;
+}
+.pr30{
+    padding-right: 30px;
+}
+.pr40{
+    padding-right: 40px;
+}
+
+
+
+
+.mt20{
+    margin-top: 20px;
+}
+.mr20{
+    margin-right: 20px;
+}
+.mb20{
+    margin-bottom: 20px;
+}
+.ml20{
+    margin-left: 20px;
+}
