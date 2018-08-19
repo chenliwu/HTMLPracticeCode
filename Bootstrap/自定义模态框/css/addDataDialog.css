@@ -1,0 +1,196 @@
+/* 
+    添加数据模态框样式文件
+*/
+.dialog-container {
+    display: none;
+    margin: 0px auto;
+    width: 700px;
+    height: 595px;
+    /* border: 1px solid red; */
+    border-radius: 7px;
+    z-index: 9;
+    background-color: #ffffff;
+}
+
+.dialog-head-container {
+    background-image: url(../images/bg_datanchuangkuang.png);
+    background-repeat: no-repeat;
+    height: 96px;
+    line-height: 80px;
+}
+
+
+/* 关闭图标 */
+.icon-close-dialog {
+    width: 17px;
+    height: 17px;
+    float: right;
+    margin: 10px 10px 0px 0px;
+}
+
+.icon-close-dialog:hover {
+    cursor: pointer;
+}
+
+/* 标题 */
+.dialog-head {
+    margin: 0px auto;
+    margin-left: 20px;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+}
+
+.dialog-body-scrollbar-container {
+    margin: 0px 10px 0px 12px;
+}
+
+/* 主体容器 */
+.dialog-body-container {
+    margin: 0 auto;
+    overflow: auto;
+    width: 100%;
+    height: 420px;
+}
+
+/**********************************************************************************/
+.dialog-body-container::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+}
+
+.dialog-body-container::-webkit-scrollbar-track {
+    /*外层轨道，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置3）*/
+    /* background: #FF66D5; */
+}
+
+.dialog-body-container::-webkit-scrollbar-track-piece {
+    /*内层轨道，滚动条中间部分（位置4）*/
+    /* background: #FF66D5; */
+
+}
+
+.dialog-body-container::-webkit-scrollbar-thumb {
+    /*滚动条里面可以拖动的那部分（位置5）*/
+    background: rgb(167, 166, 165);
+    border-radius: 4px;
+}
+
+.dialog-body-container::-webkit-scrollbar-corner {
+    /*边角（位置6）*/
+    /* background: #82AFFF; */
+}
+
+.dialog-body-container::-webkit-scrollbar-resizer {
+    /*定义右下角拖动块的样式（位置7）*/
+    /* background: #FF0BEE; */
+}
+
+/**********************************************************************************/
+
+
+
+.dialog-body-content-container {
+    margin: 20px 10px 0px 12px;
+    /* margin-top: 20px;
+    margin-left: 12px;
+    margin-right: 10px; */
+}
+
+.dialog-body-content-head {
+    /* font-size: 14px;
+    font-weight: bold;
+    color: #141212; */
+    /* background-color: blue; */
+    /* flexbox弹性布局，实现居中 */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dialog-body-content-head span {
+    margin: 0px 10px 0px 0px;
+    display: inline-block;
+    width: 3px;
+    height: 18px;
+    background-color: #f44b24;
+}
+
+.dialog-body-content-body {
+    margin: 20px 0px 0px 0px;
+}
+
+.dialog-body-content-table {
+    margin: 0 auto;
+}
+
+.dialog-body-content-table tr td * {
+    font-size: 14px;
+    color: #A7ACB7;
+    margin: 0px 20px 0px 0px;
+
+}
+
+.dialog-body-content-table tr td *:focus {
+    border: 1px solid #f44b24;
+    outline: none;
+    padding: 1px;
+}
+
+.td-title {
+    text-align: right;
+}
+
+.td-hint {
+    text-align: right;
+}
+
+/* 公共标题文字样式 */
+.dialog-common-title-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #141212;
+}
+
+/* 公用提示文字样式 */
+.dialog-common-input-hint-text {
+    font-size: 14px;
+    color: #525243;
+}
+
+
+
+
+.dialog-attachment-table * {
+    /* border: 1px solid #A7ACB7; */
+
+}
+
+.dialog-attachment-table thead tr {
+    /* height: 40px; */
+}
+
+.dialog-attachment-table thead tr td {}
+
+
+
+
+
+
+/* 尾部容器 */
+.dialog-footer-container {
+    margin: 0px auto;
+    height: 80px;
+    /* flexbox弹性布局，实现居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-footer {
+    text-align: center;
+}
+
+.dialog-footer * {
+    margin: 0px 25px 0px 25px;
+}

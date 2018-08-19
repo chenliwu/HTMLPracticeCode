@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a73a5d4-b86c-4fc7-8737-e9c8181e095d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Bootstrap/images/bg_datanchuangkuang.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Bootstrap/images/bg_tanchuang.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Bootstrap/弹出层/自定义弹出框.html" afterPath="" />
-    </list>
+    <list default="true" id="3a73a5d4-b86c-4fc7-8737-e9c8181e095d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -182,12 +178,12 @@
       <workItem from="1534254977689" duration="680000" />
       <workItem from="1534339059565" duration="660000" />
       <workItem from="1534428174318" duration="643000" />
-      <workItem from="1534557698283" duration="1186000" />
+      <workItem from="1534557698283" duration="1430000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3169000" />
+    <option name="totallyTimeSpent" value="3413000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
