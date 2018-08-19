@@ -20,28 +20,18 @@
             list-style: none;
         }
 
-        #addDialog{
-            /* 
-                z-index：调整定位时重叠块的上下位置。
-                当块设置了position属性，才能设置该属性，默认值为0
-            */
-            position: relative;
-            z-index: 3;
+
+        /* 公共标题文字样式 */
+        .dialog-common-title-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #141212;
         }
-        .dialog-background-container {
-            position: absolute;
-            left: 0px;
-            top: 0px;
-            background-color: #000;
-            width: 100%;
-            height: 100%;
-            /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
-            filter: alpha(opacity=60);
-            /*设置透明度为60%*/
-            opacity: 0.3;
-            /*非IE浏览器下设置透明度为60%*/
-            display: none;
-            z-index: 2;
+
+        /* 公用提示文字样式 */
+        .dialog-common-input-hint-text {
+            font-size: 14px;
+            color: #525243;
         }
 
 
@@ -85,7 +75,6 @@
             background-color: #ffffff;
             text-decoration: none;
         }
-
         .btn-customer-default:hover {
             background: rgba(238, 230, 238, 0.8);
         }

@@ -8,8 +8,29 @@
     height: 595px;
     /* border: 1px solid red; */
     border-radius: 7px;
-    z-index: 9;
     background-color: #ffffff;
+     /* 
+        z-index：调整定位时重叠块的上下位置。
+        当块设置了position属性，才能设置该属性，默认值为0
+     */
+    position: relative;
+    z-index: 3;
+}
+/* 弹出框背景色 */
+.dialog-background-container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
+    filter: alpha(opacity=60);
+    /*设置透明度为60%*/
+    opacity: 0.3;
+    /*非IE浏览器下设置透明度为60%*/
+    display: none;
+    z-index: 2;
 }
 
 .dialog-head-container {
@@ -131,34 +152,15 @@
 
 }
 
+.dialog-body-content-table tr td * {
+    padding: 0px 0px 0px 5px;
+}
+
 .dialog-body-content-table tr td *:focus {
     border: 1px solid #f44b24;
     outline: none;
-    padding: 1px;
+    padding: 0px 0px 0px 5px;
 }
-
-.td-title {
-    text-align: right;
-}
-
-.td-hint {
-    text-align: right;
-}
-
-/* 公共标题文字样式 */
-.dialog-common-title-text {
-    font-size: 14px;
-    font-weight: bold;
-    color: #141212;
-}
-
-/* 公用提示文字样式 */
-.dialog-common-input-hint-text {
-    font-size: 14px;
-    color: #525243;
-}
-
-
 
 
 .dialog-attachment-table * {
@@ -174,9 +176,6 @@
 
 
 
-
-
-
 /* 尾部容器 */
 .dialog-footer-container {
     margin: 0px auto;
@@ -188,7 +187,7 @@
 }
 
 .dialog-footer {
-    text-align: center;
+    /* text-align: center; */
 }
 
 .dialog-footer * {
