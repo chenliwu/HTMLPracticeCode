@@ -17,7 +17,12 @@
 			$("#btnTest").click(function(){
 				//$("#city").val("sz");//选择城市
 				//选中就好输出对应的value值
-				alert($("#city :selected").val());
+				//alert($("#city :selected").val());
+
+
+				//获取select 选中的 text :
+    			//$("#city").find("option:selected").text();
+				alert($("#city :selected").text());
 			});
 
 			//监听选择的改变
