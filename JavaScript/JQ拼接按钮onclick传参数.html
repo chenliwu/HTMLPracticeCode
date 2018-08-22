@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQ拼接按钮onclick传参数</title>
+    <script src="js/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+
+    <div id="mdiv">
+
+    </div>
+
+    <script>
+        $(function(){
+
+            var html = '<button type="button" title="点击可查看合作附件" onclick=downFile("'+"test"+'")>下载</button>';
+            $("#mdiv").html(html);
+        });
+        function downFile(msg){
+            alert(msg);
+        }
+    </script>
+</body>
+</html>

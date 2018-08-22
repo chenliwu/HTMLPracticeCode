@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js字符串拼接onclick出现的问题</title>
+    <script src="js/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+    <div id="box">
+ 
+    </div>
+</body>
+</html>
+
+<script>
+    function show(a,b) {
+        //console.log(a.name);
+        //console.log(a.age);
+        console.log(a);
+        console.log(b);
+    }
+ 
+    function show2(a) {
+        console.log(a);
+        alert(a);
+        console.log(a.name);
+        console.log(a.age);
+ 
+    }
+ 
+    var arr = [
+        {
+            name:'wangwu',
+            age:23,
+            hight:[180,180,180]
+        },
+ 
+        {
+            name:'zhangsan',
+            age:22,
+            hight:[180,160,180]
+        },
+        {
+            name:'lisi',
+            age:21,
+            hight:[180,170,180]
+        }
+    ]
+ 
+    var ht=''
+ 
+ 
+    for(var i=0 ; i< arr.length ; i++){
+        //错误示范1,点击事件不触发
+        //ht = ht + '<div><button onclick="show(arr[i].name,arr[i].age)">我是按钮'+i+'</button></div><br>'
+ 
+        //错误示范2,点击事件在页面加载时候就已执行
+        //ht = ht + '<div><button onclick="'+show(arr[i].name,arr[i].age)+'">我是按钮'+i+'</button></div><br>'
+ 
+        //错误示范3,点击事件不触发
+        //ht = ht + '<div><button onclick="show('+arr[i].name+','+ arr[i].age +')">我是按钮'+i+'</button></div><br>'
+ 
+        //错误示范4
+        //ht = ht + '<div><button onclick=show2("'+arr[i]+'")>我是按钮'+i+'</button></div><br>'
+ 
+        //正确示范1
+        //ht = ht + '<div><button onclick=show("'+arr[i].name+'","'+ arr[i].age +'")>我是按钮'+i+'</button></div><br>'
+        
+        //正确示范2
+        ht = ht + '<div><button onclick=show2('+JSON.stringify(arr[i])+')>我是按钮'+i+'</button></div><br>'
+ 
+ 
+    }
+ 
+    $('#box').append(ht)
+</script>
