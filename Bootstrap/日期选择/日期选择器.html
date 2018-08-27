@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>日期选择器</title>
+    <link rel="stylesheet" href="../bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css.map">
+    
+</head>
+
+<body>
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <label>选择日期：</label>
+                <!--指定 date标记-->
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <label>选择日期+时间：</label>
+                <!--指定 date标记-->
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js文件顺序很重要 -->
+    <script src="../js/jquery-2.1.0.min.js"></script>
+    <script src="../js/moment.min.js"></script>
+
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+ 
+    
+    <script>
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD',   //选中的日期格式
+                locale: moment.locale('zh-cn')
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'YYYY-MM-DD hh:mm',
+                locale: moment.locale('zh-cn')
+            });
+        });
+    </script>
+
+</body>
+
+</html>
