@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义弹出框4</title>
+
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/addDataDialog.css">
+    <link rel="stylesheet" href="css/common.css">
+
+    <script src="../js/jquery-2.1.0.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        #myModal input:focus {
+            border: 1px solid #f44b24;
+            outline: none;
+            padding: 0px 0px 0px 12px;
+        }
+        #myModal select:focus {
+            border: 1px solid #f44b24;
+            outline: none;
+            padding: 0px 0px 0px 12px;
+        }
+
+        /* 公共标题文字样式 */
+        .dialog-common-title-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #141212;
+        }
+
+        /* 公用提示文字样式 */
+        .dialog-common-input-hint-text {
+            font-size: 14px;
+            color: #525243;
+        }
+
+
+        /* 主色按钮 */
+        .btn-customer-primary,
+        .btn-customer-primary:visited,
+        .btn-customer-primary:active,
+        .btn-customer-primary:link {
+            display: inline-block;
+            width: 110px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 16px;
+            color: #ffffff;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background-color: #f44b24;
+            text-decoration: none;
+            transition: 0.5s;
+        }
+
+        .btn-customer-primary:hover {
+            background: rgba(177, 13, 13, 0.9);
+        }
+
+        /* 默认按钮 */
+        .btn-customer-default,
+        .btn-customer-default:visited,
+        .btn-customer-default:active,
+        .btn-customer-default:link {
+            display: inline-block;
+            width: 110px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 16px;
+            color: #f44b24;
+            border: 1px solid #f44b24;
+            border-radius: 10px;
+            background-color: #ffffff;
+            text-decoration: none;
+        }
+
+        .btn-customer-default:hover {
+            background: rgba(238, 230, 238, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">新增</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="txt_departmentname">部门名称</label>
+                        <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="部门名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_parentdepartment">上级部门</label>
+                        <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="上级部门">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_departmentlevel">部门级别</label>
+                        <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" placeholder="部门级别">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_statu">描述</label>
+                        <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="状态">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <button id="btnShowBootstrapModal">显示bootstrap模态框</button>
+
+    <button id="btnShow">显示自定义模态框</button>
+    <button id="btnClose">关闭模态框</button>
+
+    <div class="dialog-background-container"></div>
+    <div id="addDialog" class="dialog-container">
+        <div class="dialog-head-container">
+            <img src="./images/icon-delete.png" class="icon-close-dialog close-dialog">
+            <div class="dialog-head">
+                模态框标题
+            </div>
+        </div>
+        <div class="dialog-body-container">
+
+            <div class="dialog-body-scrollbar-container">
+
+            </div>
+            <div class="dialog-body-content-container">
+
+                <div class="dialog-body-content-head dialog-common-title-text">
+                    <span></span>
+                    内容标题
+                </div>
+
+                <div class="dialog-body-content-body">
+                    <table class="dialog-body-content-table">
+                        <tr class="h50">
+                            <td class="text-right">银行账户名：</td>
+                            <td>
+                                <input class="w180 h30" type="text" placeholder="">
+                            </td>
+                            <td class="text-right"> 银行账户：</td>
+                            <td>
+                                <input class="w180 h30" type="text" placeholder=" ">
+                            </td>
+                        </tr>
+                        <tr class="h50">
+                            <td class="text-right">所属银行：</td>
+                            <td>
+                                <select class="w180 h30" type="text" placeholder="">
+                                    <option value="">所属银行</option>
+                                </select>
+                            </td>
+                            <td class="text-right"> 开户银行（全称）：</td>
+                            <td>
+                                <input id="bankFullNameElement" class="w180 h30" type="text" placeholder="">
+                            </td>
+                        </tr>
+                        <tr class="h50">
+                            <td class="text-right">企业代码：</td>
+                            <td>
+                                <input type="text" class="w180 h30" placeholder="">
+                            </td>
+                            <td class="text-right"> 企业名称：</td>
+                            <td>
+                                <select class="w180 h30" type="text" placeholder="">
+                                    <option value="">企业名称</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="h50">
+                            <td class="text-right">开户行所在地：</td>
+                            <td>
+                                <select class="w100 h30" name="privince" id="">
+                                    <option value="">省份</option>
+                                </select>
+                                <select class="w100 h30" name="city" id="">
+                                    <option value="">城市</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="dialog-body-content-container">
+
+                <div class="dialog-body-content-head dialog-common-title-text">
+                    <span></span>
+                    内容标题
+                </div>
+
+                <div class="dialog-body-content-body">
+                    <a href="javascript:void(0);" class="btn-customer-primary mb20">新增附件</a>
+                    <table class="dialog-body-content-table table table-bordered">
+                        <thead class="text-center">
+                            <tr>
+                                <td class="dialog-common-title-text" style="background-color: #FFF4F2">附件类型</td>
+                                <td class="dialog-common-title-text" style="background-color: #FFF4F2">附件名称</td>
+                                <td class="dialog-common-title-text" style="background-color: #FFF4F2">操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="dialog-footer-container">
+            <div class="dialog-footer">
+                <a href="javascript:void(0);" class="btn-customer-primary close-dialog">确定</a>
+                <a href="javascript:void(0);" class="btn-customer-default close-dialog">取消</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(function () {
+
+            initDialog("addDialog");
+
+            $("#btnShow").click(function () {
+                $("#addDialog").fadeIn();
+                $(".dialog-background-container").show();
+            });
+
+            $("#btnClose").click(function () {
+                $("#addDialog").fadeOut();
+            });
+
+
+            $("#btnShowBootstrapModal").click(function () {
+                $("#myModalLabel").text("新增");
+                $('#myModal').modal();
+            });
+
+            $("#bankFullNameElement").focus(function () {
+                $("#myModalLabel").text("银行信息");
+                $('#myModal').modal();
+            });
+
+        });
+
+        function initDialog(dialogId) {
+            var close = $(".close-dialog");
+            if (close) {
+                close.click(function () {
+                    var dialog = $("#" + dialogId);
+                    if (dialog) {
+                        dialog.hide();
+                        $(".dialog-background-container").hide();
+                    }
+                });
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
