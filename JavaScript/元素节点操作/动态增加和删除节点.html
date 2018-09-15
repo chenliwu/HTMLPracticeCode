@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态增加和删除节点</title>
+    <script src="../js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <div>
+            <input type="text" name="node">
+            <button onclick="appendChildNode(this)" data-key="node" data-hint="节点">增加节点</button>
+        </div>
+        <div id="node">
+
+        </div>
+    </div>
+
+
+    <script>
+        $(function () {
+
+        });
+
+        function appendChildNode(buttonObj) {
+            var jqobj = $(buttonObj);
+            var configKey = jqobj.data("key");
+            var hint = jqobj.data("hint");
+            var html = "";
+            html += '<div>';
+            html += '<input type="text"' + 'name="' + configKey + '"'
+                + 'placeholder="' + hint + '">';
+            html += '<button onclick="deleteHourTimePicker(this)">删除节点</button>';
+            html += '</div>';
+            var containerElement = $("#" + configKey);
+            if (containerElement) {
+                containerElement.append(html);
+            }
+            return html;
+        }
+
+        //删除时间选择器节点
+        function deleteHourTimePicker(deleteButtonObj) {
+            var parentElement = $(deleteButtonObj).parent();
+            parentElement.remove();
+        }
+
+    </script>
+
+</body>
+
+</html>

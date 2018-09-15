@@ -24,10 +24,10 @@
     <script>
         $(function () {
             $("#btnTest").click(function () {
-                
+
                 var checkedValue = ["0", "1", "2"];
                 for (var i = 0; i < checkedValue.length; i++) {
-                    setCheckbox("interest", checkedValue[i],true);
+                    setCheckbox("interest", checkedValue[i], true);
                 }
             });
 
@@ -41,7 +41,8 @@
             /**
             * 设置checkbox
             */
-            function setCheckbox(name, checkedValue,checked) {
+            function setCheckbox(name, checkedValue, checked) {
+
                 var checkboxs = document.getElementsByName(name);
                 for (var i = 0; i < checkboxs.length; i++) {
                     if (checkboxs[i].value == checkedValue) {
@@ -49,6 +50,7 @@
                         break;
                     }
                 }
+
             }
 
         });
