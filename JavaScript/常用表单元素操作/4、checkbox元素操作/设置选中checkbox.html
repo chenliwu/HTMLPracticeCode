@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>设置选中checkbox</title>
+    <script src="./../../js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+    <form>
+
+        <div>
+            <span><input type="checkbox" name="interest" value="0">跑步</span>
+            <span><input type="checkbox" name="interest" value="1">篮球</span>
+            <span><input type="checkbox" name="interest" value="2">音乐</span>
+        </div>
+
+        <input id="btnTest" type="button" value="全选">
+        <input id="btnTest1" type="button" value="全不选">
+    </form>
+    <script>
+        $(function () {
+            $("#btnTest").click(function () {
+
+                var checkedValue = ["0", "1", "2"];
+                for (var i = 0; i < checkedValue.length; i++) {
+                    setCheckbox("interest", checkedValue[i], true);
+                }
+            });
+
+            $("#btnTest1").click(function () {
+                var checkedValue = ["0", "1", "2"];
+                for (var i = 0; i < checkedValue.length; i++) {
+                    setCheckbox("interest", checkedValue[i], false);
+                }
+            });
+
+            /**
+            * 设置checkbox
+            */
+            function setCheckbox(name, checkedValue, checked) {
+
+                var checkboxs = document.getElementsByName(name);
+                for (var i = 0; i < checkboxs.length; i++) {
+                    if (checkboxs[i].value == checkedValue) {
+                        checkboxs[i].checked = checked;
+                        break;
+                    }
+                }
+
+            }
+
+        });
+    </script>
+</body>
+
+</html>

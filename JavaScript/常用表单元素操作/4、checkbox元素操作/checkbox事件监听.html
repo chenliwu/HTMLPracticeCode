@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>checkbox事件监听</title>
+    <script src="./../../js/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+    <form>
+    
+        <div>
+            <input type="hidden" id="cheboxCheckedValuesElement">
+            <span><input type="checkbox" onchange="checkboxOnchange(this)" name="interest" value="0">跑步</span>
+            <span><input type="checkbox" onchange="checkboxOnchange(this)" name="interest" value="1">篮球</span>
+            <span><input type="checkbox" onchange="checkboxOnchange(this)" name="interest" value="2">音乐</span>
+        </div>
+    
+        <input id="btnTest" type="button" value="设置选中">
+    </form>
+
+    <script>
+        $(function () {
+            $("#btnTest").click(function () {
+                    
+            });
+
+        });
+
+        function checkboxOnchange(checkboxObj){
+            var jqobj = $(checkboxObj);
+            //获取value值
+            var value = jqobj.val();
+            //获取是否选中
+            var checked = jqobj.prop("checked");
+            //console.log("value="+value);
+            //console.log("checked=" + checked);
+
+            var cheboxCheckedValues = $("#cheboxCheckedValuesElement").val();
+            if(cheboxCheckedValues.length > 0){
+                //已经记录有值
+                var arr = cheboxCheckedValues.split(";");
+                if(checked == false){
+                    var newValues = "";
+                    //取消选择，把记录的value值去掉
+                    for (var i = 0; i < arr.length-1; i++) {
+                        if (arr[i] != value) {
+                            newValues +=arr[i]+";";
+                        }
+                    }
+                    $("#cheboxCheckedValuesElement").val(newValues);
+                }else{
+                    var cheboxCheckedValues = $("#cheboxCheckedValuesElement").val();
+                    cheboxCheckedValues += value + ";";
+                    $("#cheboxCheckedValuesElement").val(cheboxCheckedValues);
+                }
+                
+            }else{
+                cheboxCheckedValues = $("#cheboxCheckedValuesElement").val();
+                cheboxCheckedValues += value + ";";
+                $("#cheboxCheckedValuesElement").val(cheboxCheckedValues);
+            }
+            console.log("多选的value数组："+ $("#cheboxCheckedValuesElement").val());
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>checkbox复选按钮</title>
+    <script src="./../../js/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+    <form>
+        <input id="checkbox" type="checkbox" value="1">三证合一
+        <input id="btnTest" type="button" value="设置checkbox为不选中状态">
+        <input id="btnTest1" type="button" value="设置checkbox为不可用状态">
+    </form>
+    <script>
+		$(function(){
+			$("#btnTest").click(function(){
+                // 判断checkbox是否选中（jquery 1.6以前版本 用  $(this).attr("checked")）
+                alert($("#checkbox").prop("checked"));
+                //设置checkbox为不选中状态
+				//$("#checkbox").attr("checked", false);
+                $("#checkbox").prop("checked",false);
+                //7、设置checkbox为选中状态
+                //$('input:checkbox').attr("checked", 'checked');//or
+                //$('input:checkbox').attr("checked", true);
+			});
+
+            $("#btnTest1").click(function(){
+                console.log("不可用");
+                //$("#checkbox").attr("disabled", true);
+                $("#checkbox").prop("disabled", true);
+            
+			});
+		});
+	</script>
+</body>
+</html>

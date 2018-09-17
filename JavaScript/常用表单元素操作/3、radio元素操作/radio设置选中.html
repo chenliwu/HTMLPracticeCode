@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>radio设置选中</title>
+    <script src="../js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+    <form action="">
+        <span><input type="radio" name="sex" value="M" checked="true">男</span>
+        <span><input type="radio" name="sex" value="F">女</span>
+    </form>
+
+    <button id="btnTest">选择男</button>
+    <button id="btnTest1">选择女</button>
+    <script>
+        $(function () {
+
+            $('input:radio[name="sex"]').change(function () {
+                var val = $('input:radio[name="sex"]:checked').val();
+                if (val == null) {
+                    alert("什么也没选中!");
+                    return false;
+                } else {
+                    alert(val);
+                }
+            });
+
+            $("#btnTest").click(function () {
+
+                setRadioChecked("sex","M", true);
+
+                // var val = $('input:radio[name="radios"]:checked').val();
+                // if (val == null) {
+                //     alert("什么也没选中!");
+                //     return false;
+                // } else {
+                //     alert(val);
+                // }
+            });
+
+            $("#btnTest1").click(function () {
+                setRadioChecked("sex","F",true);
+            });
+        });
+
+        /**
+        * 设置选中单选按钮
+        * @param value 
+        */
+        function setRadioChecked(name, checkedValue,checked) {
+            var radios = document.getElementsByName(name);
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].value == checkedValue) {
+                    radios[i].checked = checked;
+                    break;
+                }
+            }
+            // var radio = $("input:radio[value="+value+"]");
+            // if(radio){
+            //     //选中单选按钮
+            //     radio.prop("checked",true);
+            // }
+        }
+
+    </script>
+
+</body>
+
+</html>

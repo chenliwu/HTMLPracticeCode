@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单选按钮操作</title>
+    <script src="../js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+    <form action="">
+        <input type="radio" name="radios" value="a" checked="true">单选按钮1
+        <input type="radio" name="radios" value="b">单选按钮2
+        <input type="radio" name="radios" value="c">单选按钮3
+    </form>
+
+    <button id="btnTest">测试</button>
+
+    <script>
+        $(function () {
+
+            $('input:radio[name="radios"]').change(function () {
+                var val = $('input:radio[name="radios"]:checked').val();
+                if (val == null) {
+                    alert("什么也没选中!");
+                    return false;
+                } else {
+                    alert(val);
+                }
+            });
+
+            $("#btnTest").click(function () {
+
+                var val = $('input:radio[name="radios"]:checked').val();
+                if (val == null) {
+                    alert("什么也没选中!");
+                    return false;
+                } else {
+                    alert(val);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
