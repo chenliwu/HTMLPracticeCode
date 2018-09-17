@@ -27,15 +27,19 @@
 
         });
 
+        //添加子节点到容器
         function appendChildNode(buttonObj) {
             var jqobj = $(buttonObj);
+            //data-key data-id存储节点的信息，用于填充name属性和placeholder属性
+            //后期可以通过name属性来获取节点元素的集合，获取输入值
             var configKey = jqobj.data("key");
             var hint = jqobj.data("hint");
             var html = "";
+            //动态拼接子节点的HTML代码
             html += '<div>';
             html += '<input type="text"' + 'name="' + configKey + '"'
                 + 'placeholder="' + hint + '">';
-            html += '<button onclick="deleteHourTimePicker(this)">删除节点</button>';
+            html += '<button onclick="deleteChildNode(this)">删除节点</button>';
             html += '</div>';
             var containerElement = $("#" + configKey);
             if (containerElement) {
@@ -44,9 +48,11 @@
             return html;
         }
 
-        //删除时间选择器节点
-        function deleteHourTimePicker(deleteButtonObj) {
+        //删除子节点
+        function deleteChildNode(deleteButtonObj) {
+            //获取子节点的父级元素
             var parentElement = $(deleteButtonObj).parent();
+            //删除元素节点
             parentElement.remove();
         }
 
