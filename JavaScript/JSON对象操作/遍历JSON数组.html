@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>遍历JSON数组</title>
+
+    <div>
+        <h3>省份</h3>
+        <div>
+
+        </div>
+        <select id="provinceSelectElement">
+
+        </select>
+        <div id="provinceContainerElement">
+
+        </div>
+    </div>
+</head>
+
+<body>
+    <script src="./../js/jquery-2.1.0.min.js"></script>
+    <script>
+
+
+        $(function () {
+
+            test();
+
+            initSelectElement();
+
+        });
+
+        //初始化Select元素
+        function initSelectElement() {
+            var provinceHtml = "";
+            provinceHtml += '<option value="">省份</option>';
+            for (var i = 0; i < PROVINCES.length; i++) {
+                provinceHtml += '<option value="' + PROVINCES[i].id + '">' + PROVINCES[i].name + '</option>';
+            }
+            $("#provinceSelectElement").html(provinceHtml);
+        }
+
+
+        function test() {
+            //遍历单个JSON对象
+            var provinceHtml = "";
+            for (var i = 0; i < PROVINCES.length; i++) {
+                provinceHtml += '<div>';
+                provinceHtml += PROVINCES[i].id + ":" + PROVINCES[i].name;
+                provinceHtml += '</div>';
+                // for (var val in PROVINCES[i]) {
+                //     provinceHtml += '<div>';
+                //     provinceHtml += val + ":" + PROVINCES[i][val];
+                //     provinceHtml += '</div>';
+                // }
+            }
+            $("#provinceContainerElement").html(provinceHtml);
+        }
+
+        var PROVINCES = [
+            { id: 10, name: '北京', tp: 1 },
+            { id: 11, name: '上海', tp: 1 },
+            { id: 12, name: '天津', tp: 1 },
+            { id: 13, name: '重庆', tp: 1 },
+            { id: 14, name: '河北', tp: 2 },
+            { id: 15, name: '山西', tp: 2 },
+            { id: 16, name: '内蒙古', tp: 3 },
+            { id: 17, name: '辽宁', tp: 2 },
+            { id: 18, name: '吉林', tp: 2 },
+            { id: 19, name: '黑龙江', tp: 2 },
+            { id: 20, name: '江苏', tp: 2 },
+            { id: 21, name: '浙江', tp: 2 },
+            { id: 22, name: '安徽', tp: 2 },
+            { id: 23, name: '福建', tp: 2 },
+            { id: 24, name: '江西', tp: 2 },
+            { id: 25, name: '山东', tp: 2 },
+            { id: 26, name: '河南', tp: 2 },
+            { id: 27, name: '湖北', tp: 2 },
+            { id: 28, name: '湖南', tp: 2 },
+            { id: 29, name: '广东', tp: 2 },
+            { id: 30, name: '广西', tp: 3 },
+            { id: 31, name: '海南', tp: 2 },
+            { id: 32, name: '四川', tp: 2 },
+            { id: 33, name: '贵州', tp: 2 },
+            { id: 34, name: '云南', tp: 2 },
+            { id: 35, name: '西藏', tp: 3 },
+            { id: 36, name: '陕西', tp: 2 },
+            { id: 37, name: '甘肃', tp: 2 },
+            { id: 38, name: '青海', tp: 2 },
+            { id: 39, name: '宁夏', tp: 3 },
+            { id: 40, name: '新疆', tp: 3 },
+            { id: 41, name: '香港', tp: 4 },
+            { id: 42, name: '澳门', tp: 4 },
+            { id: 43, name: '台湾', tp: 2 },
+        ];
+
+
+    </script>
+</body>
+
+</html>
