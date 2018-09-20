@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <title>清空文件域</title>
+    <script src="./../js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+
+    <input type="file" onchange="previewHandle(this)" />
+    <img id="preview-img" width="400" height="500" />
+
+
+</body>
+
+
+<script>
+    $(function () {
+        var uploadElement = $("#uploadElement");
+        var imgElement = $("#imgElement");
+    });
+
+    function previewHandle(fileDOM) {
+        var file = fileDOM.files[0], // 获取文件
+            imageType = /^image\//,
+            reader = '';
+
+        // 文件是否为图片
+        if (!imageType.test(file.type)) {
+            alert("请选择图片！");
+            //清空文件域
+            fileDOM.value = ""; //虽然file的value不能设为有字符的值，但是可以设置为空值
+            //或者
+            //fileDOM.outerHTML = fileDOM.outerHTML; //重新初始化了file的html
+            return;
+        }
+        // 判断是否支持FileReader    
+        if (window.FileReader) {
+            reader = new FileReader();
+        }
+        // IE9及以下不支持FileReader
+        else {
+            alert("您的浏览器不支持图片预览功能，如需该功能请升级您的浏览器！");
+            return;
+        }
+        // 读取完成    
+        reader.onload = function (event) {
+            // 获取图片DOM
+            var img = document.getElementById("preview-img");
+            // 图片路径设置为读取的图片    
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function isImg(file){
+        if (!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file)) {
+            alert("图片类型必须是.gif,jpeg,jpg,png中的一种")
+            return false;
+        }
+    }
+
+</script>
+
+</html>
