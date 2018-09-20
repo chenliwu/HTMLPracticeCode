@@ -8,38 +8,23 @@
     <script src="../js/jquery-2.1.0.min.js"></script>
 </head>
 <body>
-    <form action="">
-        <button class="viewTemplateFile" onclick="viewTemplateFile(this)" type="button" >模板1</button>
-        <button class="viewTemplateFile" onclick="viewTemplateFile(this)" type="button" >模板2</button>
-        <button class="viewTemplateFile" onclick="viewTemplateFile(this)" type="button" >模板3</button>
-        <button class="viewTemplateFile" onclick="viewTemplateFile(this)" type="button" >模板4</button>
-        <button class="viewTemplateFile" onclick="viewTemplateFile(this)" type="button" >模板5</button>
-    </form>
+    
 </body>
 
 <script>
-    $(function(){
-        var buttonElements = $(".viewTemplateFile");
-        //元素个数
-        console.log("size = "+buttonElements.size());
-        buttonElements.each(function(index,item){
-            console.log("index = "+index);
-            console.log("innerHTML="+item.innerHTML);
 
-            //$(DOM)：将DOM对象转化成JQ对象
-            var jqobj = $(item);
-            //节点属性操作：attr()设置获取属性方法；删除属性的方法：removeAttr()
-            jqobj.attr("data-id",index);
-        })
+    var arrayList = new Array();
+
+    $(function(){
+        arrayList.push("1");
+        arrayList.push("2");
+        arrayList.push("3");
+        console.log("length:"+arrayList.length);
+        for(var i = 0 ; i<arrayList.length;i++){
+            console.log(arrayList[i]);
+        }
     });
 
-    /**
-    *
-    */
-    function viewTemplateFile(buttonObj){
-        var id = $(buttonObj).data("id");
-        alert("id = "+id);
-    }
 
 </script>
 </html>

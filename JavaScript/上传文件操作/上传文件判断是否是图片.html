@@ -44,6 +44,10 @@
         // 文件是否为图片
         if (!imageType.test(file.type)) {
             alert("请选择图片！");
+            //清空文件域
+            var fileInput = $(fileDOM)
+            fileInput.after(fileInput.clone().val(""));
+            fileInput.remove();
             return;
         }
         // 判断是否支持FileReader    
