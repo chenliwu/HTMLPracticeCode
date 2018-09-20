@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JS上传文件显示本地图片</title>
-    <script src="./js/jquery-2.1.0.min.js"></script>
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <title>上传文件判断是否是图片</title>
+    <script src="./../js/jquery-2.1.0.min.js"></script>
 </head>
 
 <body>
@@ -59,6 +63,13 @@
             img.src = event.target.result;
         };
         reader.readAsDataURL(file);
+    }
+
+    function isImg(file){
+        if (!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file)) {
+            alert("图片类型必须是.gif,jpeg,jpg,png中的一种")
+            return false;
+        }
     }
 
 </script>

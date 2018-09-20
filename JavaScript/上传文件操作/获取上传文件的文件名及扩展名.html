@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>获取上传文件的文件名及扩展名</title>
+    <script src="./../js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+
+    <input type="file" name="myfile" id="myfile" value="" />
+    <button id="mybtn">点击</button>
+
+    <script>
+        //获取一个上传文件的扩展名
+        var myfile = document.getElementById('myfile');
+        var mybtn = document.getElementById('mybtn');
+        mybtn.onclick = function () {
+            //获取文件上传文件的文件名和扩展名
+            if (myfile.files[0] == undefined) {
+                alert('未上传文件！');
+            } else {
+                //获取上传文件的文件名
+                alert(myfile.files[0].name);
+            }
+            //获取上传文件的扩展名
+            var filevalue = myfile.value;
+            var index = filevalue.lastIndexOf('.');
+            alert(filevalue.substring(index));
+        }
+    </script>
+
+</body>
+
+</html>
