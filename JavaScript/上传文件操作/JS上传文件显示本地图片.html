@@ -37,6 +37,8 @@
             imageType = /^image\//,
             reader = '';
 
+        console.log("size = "+file.size);
+
         // 文件是否为图片
         if (!imageType.test(file.type)) {
             alert("请选择图片！");
