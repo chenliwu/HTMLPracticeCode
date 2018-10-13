@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>加载效果</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <script src="../js/jquery-2.1.0.min.js"> </script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+    <style>
+        .loading {
+            margin: 0px auto;
+            width: 250px;
+            height: 70px;
+            line-height: 70px;
+            position: absolute;
+            top: 45%;
+            left: 40%;
+            color: #fff;
+            padding-left: 60px;
+            font-size: 15px;
+            background: #000 url(../images/loading.gif) no-repeat 20px 50%;
+            opacity: 0.7;
+            z-index: 9999;
+            -moz-border-radius: 20px;
+            -webkit-border-radius: 20px;
+            border-radius: 20px;
+            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="row">
+        <button id="load" onclick="HtmlLoad()">加载页面</button>
+    </div>
+    <div class="container">
+        <div id="myModal" class="modal fade" data-keyboard="false" data-backdrop="static" data-role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+            <div id="loading" class="loading">提交申请中...</div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        function HtmlLoad(url) {
+            $('#myModal').modal('show');
+
+            setTimeout(function () {
+                $('#myModal').modal('hide');
+            }, 3000);
+
+        }
+    </script>
+
+</body>
+
+</html>
