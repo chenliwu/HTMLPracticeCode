@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模态框与树状组件结合</title>
+    <link rel="stylesheet" href="./../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./../bootstrap-treeview/src/css/bootstrap-treeview.min.css">
+    <script src="./../js/jquery-2.1.0.min.js"></script>
+
+    <script src="./../bootstrap-treeview/src/js/bootstrap-treeview.min.js"></script>
+    <script src="./../bootstrap-3.3.7-dist//js/bootstrap.js"></script>
+</head>
+
+<body>
+
+    <button id="btnElement" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">开始演示模态框</button>
+
+    <div class="modal fade" id="MyModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle">模态框与树状组件结合</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div id="showSelectedInfoElement"></div>
+                        <div id="tree"></div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <div class="text-center">
+                        <button type="button" id="submit" class="btn btn-lg btn-info">提交</button>
+                        <button type="button" id="cancel" class="btn btn-lg btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+
+    <script>
+
+        $(function () {
+            $("#btnElement").click(function () {
+                $("#MyModal").modal("show");
+            });
+            //$('#tree').treeview({ data: getTree() });
+            $('#tree').treeview({
+                data: getTree(),
+                levels: '1',    //设置继承树默认展开的级别。
+                onNodeSelected: function (event, node) {    //节点选中事件
+                    // 事件代码...
+                    console.log(node);
+                    $("#showSelectedInfoElement").html(showJson(node));
+                    //showJson(node);
+                }
+            });
+        });
+
+        /**
+         * 遍历JSON对象
+         */
+        function showJson(data) {
+            var content = "";
+            for (var val in data) {
+                content += val + ":" + data[val] + "\n";
+            }
+            return content;
+        }
+
+
+
+
+        /**
+         * 获取树状的数据
+         */
+        function getTree() {
+            // Some logic to retrieve, or generate tree structure
+            //return customerList;
+            return generate();
+        }
+
+        /**
+         * 生成节点数据，可以使用递归扫描数据
+         */
+        function generate() {
+            var dataList = [];
+            for (var i = 0; i < 10; i++) {
+                var item = {};
+                item.text = "节点" + i;
+                item.tags = "节点" + i;
+                var itemNodes = [];
+                for (var j = 0; j < 3; j++) {
+                    var itemNode = {};
+                    itemNode.text = "子节点" + j;
+                    itemNode.tags = "子节点" + j;
+                    itemNodes.push(itemNode);
+                }
+                item.nodes = itemNodes;
+                dataList.push(item);
+            }
+            return dataList;
+        }
+
+
+        var customerList = [
+            {
+                text: "测试客户1",
+                nodes: [
+                    {
+                        text: "测试客户1-子节点1",
+                        nodes: [
+                            {
+                                text: "测试客户1-子节点1-子节点1",
+                                tags: "测试客户1-子节点1-子节点1"
+                            }
+                        ],
+                        tags: "测试客户1-子节点1",  //添加额外的信息
+                    },
+                ],
+                tags: "测试客户1",
+            },
+            {
+                text: "测试客户2",
+                tags: "测试客户2",
+            },
+            {
+                text: "测试客户3",
+                tags: "测试客户3",
+            },
+        ];
+
+        /**
+         * 接收一个数组，每个数组对象都是json对象
+         * （1）text： 列表树节点上的文本，通常是节点右边的小图标。
+         * （2）icon：列表树节点上的图标，通常是节点左边的图标。
+         * （3）selectedIcon：当某个节点被选择后显示的图标，通常是节点左边的图标。
+         * （4）nodes：子节点数组，
+         */
+        var tree = [
+            {
+                text: "Parent 1",
+                nodes: [
+                    {   //Parent 1子节点1
+                        text: "Child 1",
+                        nodes: [
+                            {
+                                text: "Grandchild 1"
+                            },
+                            {
+                                text: "Grandchild 2"
+                            }
+                        ]
+                    },
+                    {    //Parent 1子节点2
+                        text: "Child 2"
+                    }
+                ]
+            },
+            {
+                tags: '123',
+                text: "Parent 2"
+            },
+            {
+                text: "Parent 3"
+            },
+            {
+                text: "Parent 4"
+            },
+            {
+                text: "Parent 5"
+            }
+        ];
+    </script>
+</body>
+
+</html>

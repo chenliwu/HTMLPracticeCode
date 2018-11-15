@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>树状组件1</title>
+    <link rel="stylesheet" href="./../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./../bootstrap-treeview/src/css/bootstrap-treeview.min.css">
+    <script src="./../js/jquery-2.1.0.min.js"></script>
+    <script src="./../bootstrap-treeview/src/js/bootstrap-treeview.min.js"></script>
+    <script src="./../bootstrap-3.3.7-dist//js/bootstrap.js"></script>
+</head>
+
+<body>
+
+    <div id="tree"></div>
+
+
+
+    <script>
+
+        $(function () {
+            $('#tree').treeview({ data: getTree() });
+        });
+
+        function getTree() {
+            // Some logic to retrieve, or generate tree structure
+            return tree;
+        }
+
+        var tree = [
+            {
+                text: "Parent 1",
+                nodes: [
+                    {
+                        text: "Child 1",
+                        nodes: [
+                            {
+                                text: "Grandchild 1"
+                            },
+                            {
+                                text: "Grandchild 2"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Child 2"
+                    }
+                ]
+            },
+            {
+                text: "Parent 2"
+            },
+            {
+                text: "Parent 3"
+            },
+            {
+                text: "Parent 4"
+            },
+            {
+                text: "Parent 5"
+            }
+        ];
+    </script>
+</body>
+
+</html>
