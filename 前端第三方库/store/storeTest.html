@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>store练习</title>
+    <script src="./store.legacy.min.js"></script>
+</head>
+
+<body>
+    <button onclick="saveData()">存放参数数据</button>
+    <br>
+    <button onclick="showData()">显示参数数据</button>
+    <br>
+    <button onclick="clearData()">清除数据</button>
+    <br>
+    <div id="showInfoElement"></div>
+</body>
+
+<script>
+
+    function saveData() {
+        store.set('user', { name: 'jsws', account: 'jsws', password: '123456' });
+    }
+
+    function showData() {
+        var data = store.get('user');
+        var showInfoElement = document.getElementById('showInfoElement');
+        if (showInfoElement) {
+            if (data) {
+                showInfoElement.innerHTML = `存放store的数据：${JSON.stringify(data)}`;
+            } else {
+                showInfoElement.innerHTML = '数据为空';
+            }
+
+        }
+    }
+
+    function clearData() {
+        store.remove('user');
+    }
+
+    window.onload = function () {
+
+    }
+</script>
+
+</html>
