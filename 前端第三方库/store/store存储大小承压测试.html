@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>store存储大小承压测试</title>
+    <script src="./store.legacy.min.js"></script>
+</head>
+
+<body>
+    <button onclick="saveData()">存放参数数据</button>
+    <br>
+    <button onclick="showData()">显示参数数据</button>
+    <br>
+    <button onclick="clearData()">清除数据</button>
+    <br>
+    <div id="showInfoElement"></div>
+</body>
+
+<script>
+
+    function saveData() {
+        var data = "";
+        ///500万个字符，未报错
+        for (var i = 0; i < 500 * 10000; i++) {
+            data = data + 'A';
+        }
+        store.set('data', data);
+    }
+
+    function showData() {
+        var data = store.get('data');
+        var showInfoElement = document.getElementById('showInfoElement');
+        if (showInfoElement) {
+            if (data) {
+                showInfoElement.innerHTML = `存放store的数据长度：${data.length}`;
+            } else {
+                showInfoElement.innerHTML = '数据为空';
+            }
+
+        }
+    }
+
+    function clearData() {
+        store.remove('data');
+    }
+
+    window.onload = function () {
+
+    }
+</script>
+
+</html>
