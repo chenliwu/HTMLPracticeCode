@@ -10,13 +10,10 @@
 </head>
 
 <body>
-    <div>
-        ng-model 指令用于绑定应用程序数据到 HTML 控制器(input, select, textarea)的值。
-    </div>
     <div ng-app="myApp" ng-controller="myCtrl">
         名字: <input ng-model="name">
+        <h1>你输入了: {{name}}</h1>
     </div>
-
 
     <script>
         var app = angular.module('myApp', []);
@@ -24,6 +21,8 @@
             $scope.name = "John Doe";
         });
     </script>
+
+    <p>修改输入框的值，标题的名字也会相应修改。</p>
 
 </body>
 
