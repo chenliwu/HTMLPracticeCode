@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scope 作用范围</title>
+    <script src="./../js/angular.min.js"></script>
+</head>
+
+<body>
+    <div>
+        当我们使用 ng-repeat 指令时，每个重复项都访问了当前的重复对象:
+    </div>
+
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+        <ul>
+            <!-- ng-repeat指令：克隆重复的HTML元素。 -->
+            <li ng-repeat="x in names">{{x}}</li>
+        </ul>
+
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller('myCtrl', function ($scope) {
+            $scope.names = ["Emil", "Tobias", "Linus"];
+        });
+    </script>
+
+</body>
+
+</html>
