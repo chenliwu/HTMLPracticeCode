@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    window.onload = function () {
+        //test1();
+        test2();
+    }
+
+
+    function test1() {
+        //var url = "myapp://index.html?page=index& id = 123";
+        var url = "myapp://index.html";
+        //去除所有空格
+        url = url.replace(/\s/ig, '');
+        //split方法按照给定规则分隔字符串，返回一个游分隔出来的子字符串组成的数组。
+        //若是不存在给定的字符，则返回整个字符串的数组，数组长度为1
+        var urlArr = url.split('?');
+        console.log(urlArr);
+        var params = new Map();
+        if (urlArr.length > 1) {
+            var paramsStr = urlArr[1].split('&');
+
+        }
+
+    }
+
+    function test2() {
+        var url = "myapp://index.html?page=index& id = 123";
+        //var url = "myapp://index.html";
+        console.log("getUrlParamsToJSON(url):", getUrlParamsToJSON(url));
+        console.log("");
+
+        var params = getUrlParamsToMap(url);
+        console.log("getUrlParamsToMap(url):", params);
+        //在map当中，如果key不存在，则返回undefined
+        console.log("page:", params.get('page'));
+        console.log("test:", params.get('test'));
+    }
+
+    // 获取URL的查询参数
+    // 将参数转化成JSON对象：如果URL没有携带参数，则JSON对象为{}
+    function getUrlParamsToJSON(url) {
+        var params = {};
+        //去除所有空格
+        url = url.replace(/\s/ig, '');
+        //正则表达式匹配
+        url.replace(/([^?&=]+)=([^&]+)/g, (_, key, value) => {
+            params[key] = value;
+        });
+        return params;
+    }
+
+    // 获取URL的查询参数
+    // 将参数存放到map当中，如果URL没有携带参数，则map的长度为0，param.get(key)为
+    function getUrlParamsToMap(url) {
+        var params = new Map();
+        //去除所有空格
+        url = url.replace(/\s/ig, '');
+        //正则表达式匹配
+        url.replace(/([^?&=]+)=([^&]+)/g, (_, key, value) => {
+            params.set(key, value);
+        });
+        return params;
+    }
+
+
+
+</script>
+
+</html>
