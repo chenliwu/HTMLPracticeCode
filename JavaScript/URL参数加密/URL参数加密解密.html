@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URL参数加密解密</title>
+</head>
+
+<body>
+
+</body>
+<script src="./crypto-js-3.1.9-1/crypto-js.js"></script>
+<!-- <script src="./crypto-js-3.1.9-1/aes.js"></script>
+<script src="./crypto-js-3.1.9-1/mode-ecb.js"></script> -->
+<script>
+
+    // 前端生成16位AES加密算法的KEY
+    function getKey() {
+        var keyLength = 16;
+        // 使用当前时间生成随机种子
+        var timestamp = (new Date()).getTime().toString();
+        var maxPos = timestamp.length;
+        var pwd = '';
+        for (i = 0; i < keyLength; i++) {
+            pwd += timestamp.charAt(Math.floor(Math.random() * maxPos));
+        }
+        return pwd;
+    }
+
+    var AESKey = getKey();
+
+    // 加密
+    function Encrypt(word) {
+        var key = CryptoJS.enc.Utf8.parse(AESKey);
+
+        var srcs = CryptoJS.enc.Utf8.parse(word);
+        var encrypted = CryptoJS.AES.encrypt(srcs, key, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+        return encrypted.toString();
+    }
+
+    // 解密
+    function Decrypt(word) {
+        var key = CryptoJS.enc.Utf8.parse(AESKey);
+        var decrypt = CryptoJS.AES.decrypt(word, key, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+        return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+    }
+
+    window.onload = function () {
+        var word = 'http://192.168.0.178:8080/t2';
+        console.log('AES加密的KEY：', AESKey);
+        console.log('要加密的内容：', word);
+        var aesWord = Encrypt(word);
+        console.log('加密后的内容：', aesWord);
+        console.log('解密后的内容：', Decrypt(aesWord));
+    }
+</script>
+
+</html>
