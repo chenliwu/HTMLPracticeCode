@@ -24,14 +24,40 @@
     }
 
     window.onload = function () {
-        var url = "bytter-bfs-app:://index/sso?appServerAddress=XXXX&username=XXX";
-        //var url = "bytter-bfs-app:://";
+        test2();
+    }
+
+    function test1() {
+        var url = "bytter-bfs-app://index/sso?appServerAddress=XXXX&username=XXX";
+        //var url = "bytter-bfs-app://";
         var serviceType = GetUrlRelativePath(url);
         console.log('serviceType:', serviceType);
         var params = getUrlParamsToJSON(url);
         console.log('params:', params);
     }
 
+    function test2() {
+        //var url = 'bytter-bfs-app://';
+        //var url = 'bytter-bfs-app://index/sso';
+        var url = 'bytter-bfs-app://index/todoApprove1';
+
+        if (url.indexOf("?") != -1) {
+            url = url.split("?")[0];
+        }
+
+        console.log('url:', url);
+        if (url === 'bytter-bfs-app://') {
+            //打开APP
+            console.log('打开APP');
+        } else if (url === 'bytter-bfs-app://index/sso') {
+            //单点登录
+            console.log('单点登录');
+        } else if (url === 'bytter-bfs-app://index/todoApprove') {
+            console.log('审批');
+        } else {
+            console.log('不合法的URL Scheme');
+        }
+    }
 
     // 获取URL的查询参数
     // 将参数转化成JSON对象：如果URL没有携带参数，则JSON对象为{}
