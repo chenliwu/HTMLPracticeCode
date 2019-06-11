@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    function GetUrlRelativePath(url) {
+        var arrUrl = url.split("//");
+        var start = arrUrl[1].indexOf("/");
+        var relUrl = arrUrl[1].substring(start);//stop省略，截取从start开始到结尾的所有字符
+        if (relUrl.indexOf("?") != -1) {
+            relUrl = relUrl.split("?")[0];
+        }
+        return relUrl;
+    }
+
+    window.onload = function () {
+        var url = "bytter-bfs-app:://index/sso?appServerAddress=XXXX&username=XXX";
+        //var url = "bytter-bfs-app:://";
+        var serviceType = GetUrlRelativePath(url);
+        console.log('serviceType:', serviceType);
+        var params = getUrlParamsToJSON(url);
+        console.log('params:', params);
+    }
+
+
+    // 获取URL的查询参数
+    // 将参数转化成JSON对象：如果URL没有携带参数，则JSON对象为{}
+    function getUrlParamsToJSON(url) {
+        var params = {};
+        //去除所有空格
+        url = url.replace(/\s/ig, '');
+        //正则表达式匹配
+        url.replace(/([^?&=]+)=([^&]+)/g, (_, key, value) => {
+            params[key] = value;
+        });
+        return params;
+    }
+
+    // 获取URL的查询参数
+    // 将参数存放到map当中，如果URL没有携带参数，则map的长度为0，param.get(key)为
+    function getUrlParamsToMap(url) {
+        var params = new Map();
+        //去除所有空格
+        url = url.replace(/\s/ig, '');
+        //正则表达式匹配
+        url.replace(/([^?&=]+)=([^&]+)/g, (_, key, value) => {
+            params.set(key, value);
+        });
+        return params;
+    }
+
+
+</script>
+
+</html>
