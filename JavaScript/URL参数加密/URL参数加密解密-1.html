@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URL参数加密解密</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    window.onload = function () {
+        jsEncodeUrlSchemeParams();
+    }
+
+    /**
+    * JS端对URL Scheme参数加密
+    */
+    function jsEncodeUrlSchemeParams() {
+        var appServerAddress = 'http://192.168.0.178:8080/t2';
+        var token = 'test4';
+        var username = 'test4';
+
+        var timestamp = (new Date()).getTime().toString();
+
+        var openAppURLScheme1 = getOpenAppUrlSchemeByToken(appServerAddress, token, timestamp);
+        var openAppURLScheme2 = getOpenAppUrlSchemeByUsername(appServerAddress, username, timestamp);
+
+        console.log('加密后的openAppURLScheme1：', openAppURLScheme1);
+        console.log('加密后的openAppURLScheme2：', openAppURLScheme2);
+
+        var params = getUrlParamsToMap(openAppURLScheme1);
+        console.log('解密后的参数map:', params);
+
+    }
+
+    /**
+    * 获取通过token实现单点登录的URL Scheme
+    */
+    function getOpenAppUrlSchemeByToken(appServerAddress, token, timestamp) {
+        var openAppURLScheme = 'bytter-bfs-app://index/sso?appServerAddress=' + base64Encode(timestamp + appServerAddress) +
+            '&token=' + base64Encode(timestamp + token) + '&timestamp=' + timestamp;
+        return openAppURLScheme;
+    }
+
+    /**
+     * 获取通过username实现单点登录的URL Scheme
+     */
+    function getOpenAppUrlSchemeByUsername(appServerAddress, username, timestamp) {
+        var openAppURLScheme = 'bytter-bfs-app://index/sso?appServerAddress=' + base64Encode(timestamp + appServerAddress) +
+            '&username=' + base64Encode(timestamp + username) + '&timestamp=' + timestamp;
+        return openAppURLScheme;
+    }
+
+
+    function getUrlParamsToMap(url) {
+        const params = new Map();
+        const tempParams = new Map();
+        //去除所有空格
+        url = url.replace(/\s/ig, '');
+        //正则表达式匹配
+        url.replace(/([^?&=]+)=([^&]+)/g, (_, key, value) => {
+            if (key === 'timestamp') {
+                //时间戳不需要解码
+                tempParams.set(key, value);
+                params.set(key, value);
+            } else {
+                //Base64解码
+                tempParams.set(key, decodeURIComponent(base64Decode(value)));
+            }
+
+        });
+        console.log('tempParams：', tempParams);
+        const timestamp = params.get('timestamp');
+        if (timestamp) {
+            //遍历map
+            tempParams.forEach(function (value, key, map) {
+                console.log(key + ":" + value);
+                if (key !== 'timestamp') {
+                    //去除时间戳干扰串
+                    params.set(key, value.replace(timestamp, ''));
+                }
+            });
+        }
+        return params;
+    }
+
+
+
+    /**
+     * base64编码
+     * @param str
+     */
+    function base64Encode(str) {
+        return btoa(encodeURIComponent(str));
+    }
+
+    /**
+     * base64解码
+     * @param str
+     * @returns {string}
+     */
+    function base64Decode(str) {
+        return decodeURIComponent(atob(str));
+    }
+
+</script>
+
+</html>
