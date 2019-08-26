@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URL参数加密解密</title>
+</head>
+
+<body>
+    <button onclick="testEncryptURLParams()">URL参数加密测试</button>
+    <div>
+        <h3>加密后的URL：</h3>
+        <div id="showEncryptInfoElement">
+
+        </div>
+        <br><br>
+        <a id="linkElement" href="#" target="_blank">跳转到H5页面</a>
+    </div>
+
+</body>
+<script>
+
+    function testEncryptURLParams() {
+        // 资金管理系统的URL地址
+        var bfsURL = 'http://192.168.0.193:8080/t2';
+        //var bfsURL = 'http://192.168.0.193:8081/t2';
+        // 进入H5审批详情页面的URL地址：
+        //var baseURL = bfsURL + '/h5approve/#/pages/index/index';
+        var baseURL = bfsURL + '/h5approve/index.html/#/';
+        // 进入H5审批详情页面的必要参数
+        // var approveId = '250e4675-8e49-11e9-9fa3-8c89a59654fd';
+        // var businessId = '18bb35003de14a7790ceb1eb36fdf0b3';
+        // var categoryId = 'netbankPay';
+        // var accessToken = 'eac77a7ee4a651e819cd47d4104f2734';
+
+        var approveId = '76d69319-9983-11e9-bbd0-963852741951';
+        var businessId = 'f601ee6519eb42f3a433afd6e522c425';
+        var categoryId = 'lcCreateCredit';
+        var accessToken = 'eac77a7ee4a651e819cd47d4104f2734';
+
+        var timestamp = (new Date()).getTime();
+
+        var testUrl = baseURL +
+            '?approveId=' + encryptParam(timestamp, approveId) +
+            '&businessId=' + encryptParam(timestamp, businessId) +
+            '&categoryId=' + encryptParam(timestamp, categoryId) +
+            '&accessToken=' + encryptParam(timestamp, accessToken) +
+            '&timestamp=' + timestamp;
+
+        document.getElementById('showEncryptInfoElement').innerHTML = testUrl;
+        document.getElementById('linkElement').href = testUrl;
+        console.log('');
+        console.log('testEncryptURLParams:', testUrl);
+    }
+
+    // function testEncryptURLParams() {
+    //     // 资金管理系统的URL地址
+    //     var bfsURL = 'http://bfs.com';
+    //     // 进入H5审批详情页面的URL地址：
+    //     var baseURL = bfsURL + '/h5approve/#/pages/index/index';
+    //     // 进入H5审批详情页面的必要参数
+    //     var accessToken = 'accessToken';
+    //     var approveId = 'approveId';
+    //     var businessId = 'businessId';
+    //     var categoryId = 'categoryId';
+    //     var timestamp = (new Date()).getTime();
+
+    //     var testUrl = baseURL +
+    //         '?approveId=' + encryptParam(timestamp, approveId) +
+    //         '&businessId=' + encryptParam(timestamp, businessId) +
+    //         '&categoryId=' + encryptParam(timestamp, categoryId) +
+    //         '&accessToken=' + encryptParam(timestamp, accessToken) +
+    //         '&timestamp=' + timestamp;
+
+    //     document.getElementById('showEncryptInfoElement').innerHTML = testUrl;
+    //     document.getElementById('linkElement').href = testUrl;
+    //     console.log('');
+    //     console.log('testEncryptURLParams:', testUrl);
+    // }
+
+    /**
+     * URL参数加密 
+     * 参数加密公式： base64Encode(timestamp + param)
+     */
+    function encryptParam(timestamp, param) {
+        return base64Encode(timestamp + param)
+    }
+
+    /**
+     * base64编码
+     * @param str
+     */
+    function base64Encode(str) {
+        return btoa(encodeURIComponent(str));
+    }
+
+    /**
+     * base64解码
+     * @param str
+     * @returns {string}
+     */
+    function base64Decode(str) {
+        return decodeURIComponent(atob(str));
+    }
+
+</script>
+
+</html>
