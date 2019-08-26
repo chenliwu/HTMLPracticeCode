@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URL参数加密解密</title>
+</head>
+
+<body>
+    <button onclick="testEncryptURLParams()">URL参数加密测试</button>
+    <br>
+    <button onclick="testDecryptURLParams()">URL参数解密测试</button>
+    <div>
+        <h3>加密后的URL：</h3>
+        <div id="showEncryptInfoElement">
+
+        </div>
+        <a id="linkElement" href="#" target="_blank"> 跳转到H5页面</a>
+    </div>
+    <div>
+        <h3>解密后的URL参数</h3>
+        <div id="showDecryptInfoElement">
+
+        </div>
+    </div>
+
+</body>
+<script src="./js-base64-2.5.1/base64.js"></script>
+<script>
+
+
+    window.onload = function () {
+
+
+    }
+
+    var testUrl;
+
+    // 测试URL参数加密
+    function testEncryptURLParams() {
+
+        var baseURL = 'http://192.168.0.193:8081/t2/static/h5approve/#/pages/index/index';
+        var accessToken = 'eac77a7ee4a651e819cd47d4104f2734';
+        var approveId = '250e4675-8e49-11e9-9fa3-8c89a59654fd';
+        var businessId = '18bb35003de14a7790ceb1eb36fdf0b3';
+        var categoryId = 'netbankPay';
+        var timestamp = (new Date()).getTime();
+
+        testUrl = baseURL +
+            '?approveId=' + encryptParam(timestamp, approveId) +
+            '&businessId=' + encryptParam(timestamp, businessId) +
+            '&categoryId=' + encryptParam(timestamp, categoryId) +
+            '&accessToken=' + encryptParam(timestamp, accessToken) +
+            '&timestamp=' + timestamp;
+
+        document.getElementById('showEncryptInfoElement').innerHTML = testUrl;
+        document.getElementById('linkElement').href = testUrl;
+        console.log('');
+        console.log('testEncryptURLParams:', testUrl);
+    }
+
+    // 测试URL参数解密
+    // 解密过程：（1）base64解码。（2）去除时间戳干扰
+    function testDecryptURLParams() {
+        var params = getUrlParamsToMap(testUrl);
+        console.log('');
+        console.log('testDecryptURLParams:', params);
+        var html = '';
+        html += 'approveId=' + params.get('approveId') + '<br>';
+        html += 'businessId=' + params.get('businessId') + '<br>';
+        html += 'categoryId=' + params.get('categoryId') + '<br>';
+        html += 'categoryId=' + params.get('categoryId') + '<br>';
+        html += 'token=' + params.get('token') + '<br>';
+        document.getElementById('showDecryptInfoElement').innerHTML = html;
+    }
+
+
+
+    /**
+     * 参数加密 
+     * 参数加密公式： base64Encode(timestamp + param)
+     */
+    function encryptParam(timestamp, param) {
+        return base64Encode(timestamp + param)
+        //return Base64.encode(timestamp + param);
+    }
+
+
+
+    function getUrlParamsToMap(url) {
+        const params = new Map();
+        const tempParams = new Map();
+        //去除所有空格
+        url = url.replace(/\s/ig, '');
+        //正则表达式匹配
+        url.replace(/([^?&=]+)=([^&]+)/g, (_, key, value) => {
+            if (key === 'timestamp') {
+                //时间戳不需要解码
+                tempParams.set(key, value);
+                params.set(key, value);
+            } else {
+                //Base64解码
+                tempParams.set(key, decodeURIComponent(base64Decode(value)));
+            }
+
+        });
+        console.log('tempParams：', tempParams);
+        const timestamp = params.get('timestamp');
+        if (timestamp) {
+            //遍历map
+            tempParams.forEach(function (value, key, map) {
+                console.log(key + ":" + value);
+                if (key !== 'timestamp') {
+                    //去除时间戳干扰串
+                    params.set(key, value.replace(timestamp, ''));
+                }
+            });
+        }
+        return params;
+    }
+
+
+
+
+
+
+
+
+    /**
+     * base64编码
+     * @param str
+     */
+    function base64Encode(str) {
+        return btoa(encodeURIComponent(str));
+    }
+
+    /**
+     * base64解码
+     * @param str
+     * @returns {string}
+     */
+    function base64Decode(str) {
+        return decodeURIComponent(atob(str));
+    }
+
+</script>
+
+</html>

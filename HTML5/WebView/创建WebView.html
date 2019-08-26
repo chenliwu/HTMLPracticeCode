@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>Webview Example</title>
+    <script type="text/javascript">
+        // H5 plus事件处理
+        function plusReady() {
+            console.log('plusReady');
+        }
+        if (window.plus) {
+            plusReady();
+        } else {
+            document.addEventListener('plusready', plusReady, false);
+            console.log('addEventListener');
+        }
+
+        // 创建并显示新窗口
+        function create() {
+            var w = plus.webview.create('https://www.baidu.com/');
+            w.show(); // 显示窗口
+        }
+    </script>
+</head>
+
+<body>
+    创建新的Webview窗口<br />
+    <button onclick="create()">Create</button>
+</body>
+
+</html>
