@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>账号列表</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="./js/jquery-2.1.0.min.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <section class="content-header" ng-app="myApp" ng-controller="myCtrl">
+
+        </section>
+
+    </div>
+
+</body>
+<script src="./js/angular.min.js"></script>
+<script type="text/javascript">
+    const app = angular.module('myApp', []);
+
+    app.controller('myCtrl', function ($scope) {
+        // item数据结构：{}
+        $scope.addAccountList = [];
+        // 银行类型列表:{code:'',name}
+        $scope.bankTypeList = [];
+        $scope.selectedBankType = "";
+
+        initBankTypeList();
+
+        //initBankAccountList();
+
+
+        $scope.addBankAccountItem = function () {
+            $scope.addAccountList.push({});
+        };
+
+        $scope.removeBankAccountItem = function (deleteIndex, bankAccount) {
+            var confirmResult = window.confirm("确定删除?");
+            if (confirmResult == true) {
+                $scope.addAccountList.splice(deleteIndex, 1);
+                $scope.$apply();
+            }
+        };
+
+
+        function initBankTypeList() {
+            $scope.bankTypeList.push({ code: "ICBC", name: "中国工商银行" });
+            $scope.bankTypeList.push({ code: "ABC", name: "中国农业银行" });
+        }
+
+        function initBankAccountList() {
+            const list = [];
+            for (let i = 0; i < 10; i++) {
+                const item = {
+                    bankCode: "ICBC",
+                    bankName: "XXX银行",
+                    bankAccount: "银行账号" + i,
+                    accountName: "账户名称" + i,
+                    currencyCode: "币种" + i,
+                };
+                list.push(item);
+            }
+            $scope.addAccountList = list;
+        }
+
+    });
+
+
+</script>
+
+</html>

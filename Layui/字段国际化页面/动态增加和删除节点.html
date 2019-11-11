@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态增加和删除节点</title>
+    <script src="../..//js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <div>
+            <input type="text" name="node">
+            <button onclick="appendChildNode(this)" data-key="node" data-hint="节点">增加节点</button>
+        </div>
+        <div id="node">
+
+        </div>
+    </div>
+
+
+    <script>
+        $(function () {
+
+        });
+
+        //添加子节点到容器
+        function appendChildNode(buttonObj) {
+            var jqobj = $(buttonObj);
+            //data-key data-id存储节点的信息，用于填充name属性和placeholder属性
+            //后期可以通过name属性来获取节点元素的集合，获取输入值
+            var configKey = jqobj.data("key");
+            var hint = jqobj.data("hint");
+            var html = "";
+            //动态拼接子节点的HTML代码
+            html += '<div>';
+            html += '<input type="text"' + 'name="' + configKey + '"'
+                + 'placeholder="' + hint + '">';
+            html += '<button onclick="deleteChildNode(this)">删除节点</button>';
+            html += '</div>';
+            var containerElement = $("#" + configKey);
+            if (containerElement) {
+                containerElement.append(html);
+            }
+            return html;
+        }
+
+        //删除子节点
+        function deleteChildNode(deleteButtonObj) {
+            //获取子节点的父级元素
+            var parentElement = $(deleteButtonObj).parent();
+            //删除元素节点
+            parentElement.remove();
+        }
+
+    </script>
+
+</body>
+
+</html>
