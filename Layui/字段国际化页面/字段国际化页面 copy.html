@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/layui.css">
+    <script src="../layui.js"></script>
+    <script src="../../js/jquery-2.1.0.min.js"></script>
+    <title>字段国际化页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <div class="layui-form-item">
+            <button onclick="addMultiLangItem(this)" data-tableName='name'
+                class="layui-btn layui-btn-primary layui-btn-small">新增语种</button>
+        </div>
+        <form class="layui-form" action="" onsubmit="return false;">
+            <input id="keyId" name="keyId" type="hidden" value="keyId" />
+            <input id="tableName" name="tableName" type="hidden" value="tableName" />
+            <div id="multiLangContainerElement">
+            </div>
+
+            <div class="layui-form-item layui-form-submit">
+                <div class="layui-input-block">
+                    <button class="layui-btn" onclick="onFieldMultiLangSubmit()">保存</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </form>
+
+</body>
+
+<script>
+
+    $(function () {
+        layui.use('form', function () {
+            form = layui.form(); //只有执行了这一步，部分表单元素才会自动修饰成功
+
+            initList();
+            console.log("form", form);
+
+            form.on('submit(fieldMultiLangSubmit)', function (data) {
+                console.log("data", data);
+                return false;
+            });
+        });
+
+        $(document).on('click', 'button[id="deleteMultiLangItemElement"]', function () {
+            //获取子节点的父级元素
+            var parentElement = $(this).parent();
+            if (!parentElement) {
+                return;
+            }
+            //删除元素节点
+            // parentElement.remove();
+            parentElement = parentElement.parent();
+            if (parentElement) {
+                parentElement.remove();
+            }
+        });
+
+
+
+    });
+
+    function initList() {
+        for (let index = 0; index < 5; index++) {
+            multiLangList.push({
+                langCode: 'langCode' + index,
+                langContext: 'langContext' + index
+            });
+        }
+
+        var html = '';
+        for (let index = 0; index < multiLangList.length; index++) {
+            const element = multiLangList[index];
+            let multiLangItemHtml = `<div class="layui-form-item content-body" data-index="${index}">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">语种</label>
+                        <div class="layui-input-inline" style="width: 150px;">
+                            <select name="langCode" value="${element.langCode}">
+                                <option value="zh_CN">中文</option>
+                                <option value="en">英文</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">显示内容</label>
+                        <div class="layui-input-inline" style="width: 200px;">
+                            <input type="text" name="langContext" value="${element.langContext}" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <button id="deleteMultiLangItemElement" class="layui-btn layui-btn-small layui-btn-warm">
+                            <i class="layui-icon">&#xe640;</i>
+                        </button>
+                    </div>
+                </div>`;
+            html += multiLangItemHtml;
+        }
+        $("#multiLangContainerElement").append(html);
+        form.render('select'); //刷新select选择框渲染
+
+    }
+
+    const multiLangList = [];
+
+    /*
+        语种item数据结构：{
+            id:  '关联对象的ID',
+            fieldName: '关联字段的名称',
+            langCode:'语种代码',
+            langContext:'对应语种w显示内容'
+        }
+    */
+
+
+
+    function addMultiLangItem() {
+        let index = multiLangList.length;
+        let multiLangItemHtml = `<div class="layui-form-item content-body" data-index="${index}">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">语种</label>
+                        <div class="layui-input-inline" style="width: 150px;">
+                            <select name="langCode">
+                                <option value="zh_CN">中文</option>
+                                <option value="en">英文</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">显示内容</label>
+                        <div class="layui-input-inline" style="width: 200px;">
+                            <input type="text" name="langContext" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <button id="deleteMultiLangItemElement" class="layui-btn layui-btn-small layui-btn-warm">
+                            <i class="layui-icon">&#xe640;</i>
+                        </button>
+                    </div>
+                </div>`;
+        $("#multiLangContainerElement").append(multiLangItemHtml);
+        form.render('select'); //刷新select选择框渲染
+    }
+
+    function deleteMultiLangItem(deleteDomObj) {
+        //获取子节点的父级元素
+        var parentElement = $(deleteDomObj).parent();
+        if (!parentElement) {
+            return;
+        }
+        //删除元素节点
+        // parentElement.remove();
+        parentElement = parentElement.parent();
+        if (parentElement) {
+            let deleteIndex = parentElement.data("index");
+            if (deleteIndex) {
+                multiLangList.splice(deleteIndex, 1);
+            }
+            parentElement.remove();
+        }
+    }
+
+    var form;
+
+
+    function onFieldMultiLangSubmit() {
+
+        var keyId = $("#keyId").val();
+        var tableName = $("#tableName").val();
+
+        var langCodeElementList = document.getElementsByName("langCode");
+        // console.log("langCodeElementList", langCodeElementList);
+        // for (var i = 0, len = langCodeElementList.length; i < len; i++) {
+        //     console.log("langCode:", $(langCodeElementList[i]).val());
+        // }
+
+        var langContextElementList = document.getElementsByName("langContext");
+        // console.log("langContextElementList", langContextElementList);
+        // for (var i = 0, len = langContextElementList.length; i < len; i++) {
+        //     console.log("langContext:", $(langContextElementList[i]).val());
+        // }
+        var itemLength = langCodeElementList.length;
+        var multiLangItemList = [];
+        var langCodeSet = {};
+        for (let index = 0; index < itemLength; index++) {
+            const langCodeElement = $(langCodeElementList[index]);
+            let langCode = langCodeElement.val();
+            if (langCodeSet[langCode]) {
+                alert("语种有重复！请删除重复语种！");
+                return;
+            }
+            langCodeSet[langCode] = langCode;
+            const langContextElement = $(langContextElementList[index]);
+            var langContext = langContextElement.val();
+            if (!langContext) {
+                layer.alert("请输入内容！", { icon: 2 });
+                langContextElement.focus();
+                return;
+            }
+            multiLangItemList.push({
+                keyId: keyId,
+                tableName: tableName,
+                langCode: langCode,
+                context: langContext
+            });
+        }
+        console.log("multiLangItemList", multiLangItemList);
+
+
+
+    }
+
+
+
+</script>
+
+</html>
