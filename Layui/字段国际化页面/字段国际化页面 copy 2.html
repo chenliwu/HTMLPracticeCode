@@ -40,25 +40,7 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody id="multiLangContainerElement">
-
-                    <!-- <tr>
-                        <td>序号</td>
-                        <td>
-                            <select name="langCode">
-                                <option value="zh_CN">中文</option>
-                                <option value="en">英文</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" name="langContext" class="layui-input">
-                        </td>
-                        <td>
-                            <button id="deleteMultiLangItemElement" class="layui-btn layui-btn-small layui-btn-danger">
-                                删除
-                            </button>
-                        </td>
-                    </tr> -->
+                <tbody id="i18nItemListContainerElement">
 
                 </tbody>
             </table>
@@ -76,20 +58,33 @@
 
 <script>
 
+    const i18nItemList = [];
+    const oldI18nItemList = [];
+
     $(function () {
         layui.use('form', function () {
             form = layui.form(); //只有执行了这一步，部分表单元素才会自动修饰成功
 
             initList();
-            renderData();
-            console.log("form", form);
+            renderData(i18nItemList);
+
+            addLocaleChangeListener();
+            addDeleteI18NItemListener();
+            addLocaleChangeListener();
 
             form.on('submit(fieldMultiLangSubmit)', function (data) {
-                console.log("data", data);
                 return false;
             });
         });
 
+
+
+    });
+
+    /**
+     * 添加删除语种事件监听
+     */
+    function addDeleteI18NItemListener() {
         $(document).on('click', 'button[id="deleteMultiLangItemElement"]', function () {
             //获取子节点的父级元素
             var parentElement = $(this).parent();
@@ -102,95 +97,143 @@
             if (parentElement) {
                 let deleteIndex = parentElement.data("index");
                 console.log("deleteIndex", deleteIndex);
-                if (deleteIndex >= 0 && deleteIndex < multiLangList.length) {
-                    multiLangList.splice(deleteIndex, 1);
+                if (deleteIndex >= 0 && deleteIndex < i18nItemList.length) {
+                    i18nItemList.splice(deleteIndex, 1);
                 }
                 parentElement.remove();
                 // 重新渲染数据
-                renderData();
+                renderData(i18nItemList);
             }
         });
 
+    }
 
+    /**
+     * 添加显示值变化事件监听，记录输入的显示值
+     */
+    function addContextChangeListener() {
 
-    });
+        $(document).on('change', 'input[name="context"]', function () {
+            const contextElement = $(this);
+            let context = contextElement.val();
+            let index = contextElement.data("index");
+            if (index >= 0 && index < i18nItemList.length) {
+                i18nItemList[index].context = context;
+            }
+        });
+
+        /**
+               * 监听显示值失去焦点事件，记录输入的显示值
+               */
+        // $(document).on('blur', 'input[name="context"]', function () {
+
+        //     const contextElement = $(this);
+        //     let context = contextElement.val();
+        //     let index = contextElement.data("index");
+        //     console.log("input.blur.context", context);
+        //     console.log("index", index);
+        //     if (index >= 0 && index < i18nItemList.length) {
+        //         i18nItemList[index].context = context;
+        //     }
+        // });
+
+    }
+
 
     /**
      * 初始化列表
      */
     function initList() {
         for (let index = 0; index < 5; index++) {
-            multiLangList.push({
-                langCode: 'langCode' + index,
-                langContext: 'langContext' + index
+            i18nItemList.push({
+                locale: index % 2 == 0 ? 'en_US' : 'zh_CN',
+                context: 'context' + index
             });
         }
     }
 
-    function renderData() {
-        var html = '';
-        for (let index = 0; index < multiLangList.length; index++) {
-            const element = multiLangList[index];
-            let multiLangItemHtml = `<tr data-index="${index}">
-                        <td>${index + 1}</td>
-                        <td>
-                            <select name="langCode" value="${element.langCode}">
-                                <option value="zh_CN">中文</option>
-                                <option value="en">英文</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" name="langContext" value="${element.langContext}" class="layui-input">
-                        </td>
-                        <td>
-                            <button id="deleteMultiLangItemElement" class="layui-btn layui-btn-small layui-btn-danger">
-                                删除
-                            </button>
-                        </td>
-                    </tr>`;
-            html += multiLangItemHtml;
+    function renderData(dataList) {
+        let html = '';
+        if (dataList.length > 0) {
+            for (let index = 0; index < dataList.length; index++) {
+                const element = dataList[index];
+                html += getI18NItemHtml(index, element);
+            }
+        } else {
+            html = `<tr style="height:250px;"><th style="text-align:center;" colspan='4'>暂无数据！</th></tr>`;
         }
-        $("#multiLangContainerElement").html(html);
+        $("#i18nItemListContainerElement").html(html);
+        // 设置选中语种
+        const localeElementList = document.getElementsByName("locale");
+        for (let index = 0; index < localeElementList.length; index++) {
+            const localeElement = localeElementList[index];
+            $(localeElement).val(i18nItemList[index].locale);
+        }
         form.render('select'); //刷新select选择框渲染
     }
 
-
-    const multiLangList = [];
-
-    /*
-        语种item数据结构：{
-            id:  '关联对象的ID',
-            fieldName: '关联字段的名称',
-            langCode:'语种代码',
-            langContext:'对应语种w显示内容'
-        }
-    */
-
-
-
-    function addMultiLangItem() {
-        let index = multiLangList.length;
-        let multiLangItemHtml = `<tr data-index="${index}">
-                        <td>${index + 1}</td>
+    /**
+         * 拼接行HTML代码
+         * @param index
+         * @param i18nItem
+         * @returns {string}
+         */
+    function getI18NItemHtml(index, i18nItem) {
+        let i18nItemHtml = `<tr data-index="${index}">
+                        <td class="text-center">${index + 1}</td>
                         <td>
-                            <select name="langCode">
+                            <select class="localeElement" lay-filter="localeFilter" name="locale" data-locale="${i18nItem.locale}"  data-index="${index}" >
                                 <option value="zh_CN">中文</option>
-                                <option value="en">英文</option>
+                                <option value="en_US">英文</option>
                             </select>
                         </td>
-                        <td>
-                            <input type="text" name="langContext" class="layui-input">
+                        <td class="text-center">
+                            <input type="text" style="width: 100%;" name="context" value="${i18nItem.context}" data-index=${index} class="layui-input">
                         </td>
-                        <td>
+                        <td class="text-center">
                             <button id="deleteMultiLangItemElement" class="layui-btn layui-btn-small layui-btn-danger">
                                 删除
                             </button>
                         </td>
                     </tr>`;
-        $("#multiLangContainerElement").append(multiLangItemHtml);
-        multiLangList.push({
+        return i18nItemHtml;
+    }
 
+    /**
+    * 监听语种下拉框变化事件
+    */
+    function addLocaleChangeListener() {
+        form.on('select(localeFilter)', function (data) {
+            // data{ elem :节点DOM对象 ,othis:'',value:'选中的值'}
+            //TODO执行自己的代码
+            console.log("change", data);
+            let selectedLocale = data.value;
+            let localeElement = $(data.elem);
+            let index = localeElement.data("index");
+            console.log("index", index);
+            if (index >= 0 && index < i18nItemList.length) {
+                i18nItemList[index].locale = selectedLocale;
+            }
+            console.log("selected value", localeElement.val());
         });
+
+    }
+
+    function addMultiLangItem() {
+        let index = i18nItemList.length;
+        let addI18NItem = {
+            langCode: '',
+            context: '',
+        };
+        i18nItemList.push(addI18NItem);
+        let i18nItemHtml = getI18NItemHtml(index, addI18NItem);
+        // 如果列表为空，则使用html()方法
+        if (index > 0) {
+            $("#i18nItemListContainerElement").append(i18nItemHtml);
+        } else {
+            $("#i18nItemListContainerElement").html(i18nItemHtml);
+        }
+
         //刷新select选择框渲染
         form.render('select');
     }
@@ -202,17 +245,9 @@
         var keyId = $("#keyId").val();
         var tableName = $("#tableName").val();
 
-        var langCodeElementList = document.getElementsByName("langCode");
-        // console.log("langCodeElementList", langCodeElementList);
-        // for (var i = 0, len = langCodeElementList.length; i < len; i++) {
-        //     console.log("langCode:", $(langCodeElementList[i]).val());
-        // }
+        var langCodeElementList = document.getElementsByName("locale");
+        var langContextElementList = document.getElementsByName("context");
 
-        var langContextElementList = document.getElementsByName("langContext");
-        // console.log("langContextElementList", langContextElementList);
-        // for (var i = 0, len = langContextElementList.length; i < len; i++) {
-        //     console.log("langContext:", $(langContextElementList[i]).val());
-        // }
         var itemLength = langCodeElementList.length;
         var multiLangItemList = [];
         var langCodeSet = {};
@@ -239,9 +274,6 @@
             });
         }
         console.log("multiLangItemList", multiLangItemList);
-
-
-
     }
 
 
