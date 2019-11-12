@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>封装自定义JS组件</title>
+    <script src="./../js/jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <button onclick="usingCustomComponent()">使用自定义组件</button>
+    </div>
+
+    <div id="immediately"></div>
+
+    <div id="test" style="background:red;width: 100px;height: 100px;">
+
+    </div>
+
+
+    <script src="MyCustomComponent.js"></script>
+    <script src="MyCustomComponent-1.js"></script>
+    <script>
+
+        function usingCustomComponent() {
+            //调用
+            var a = new SetStyles({
+                container: "#test",
+                background: "#fff",
+                textAlign: "center",
+                text: function () {
+                    return "我是文本";
+                }
+            });
+        }
+
+        $(function () {
+
+        });  
+    </script>
+
+</body>
+
+</html>
