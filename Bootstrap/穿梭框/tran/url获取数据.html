@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.css" rel="stylesheet">
+    <link href="./tranfer.css" rel="stylesheet">
+</head>
+
+<body>
+    <h3>
+        需要启动服务才能获取数据
+    </h3>
+    <div id="transferContainer" class="row" style="height: 700px;width: 950px;"></div>
+    <div>
+        中间点击按钮图标没显示出来没关系 是因为引入的cdn问题 正常下载引入bootstrap.css的话没问题<br> 'getData' 内置方法 selectData是获取选中的数据 后面importUnitId 是收集的字段 如果需要收集多个字段就改为数组<br> $('#transferContainer').transfer('getData', 'selectData', 'importUnitId')
+    </div>
+    <h3>数据在后台 coonsole中查看</h3>
+    <button id='btn' class="btn btn-primary">获取已选数据</button>
+    <div>
+        刷新分两种 如果是通过url获取的数据 刷新 直接运行$('#transferContainer').transfer('refresh')即可刷新 <br> 若是和示例一样 本地的数据 则用 $('#transferContainer').transfer('refresh',data)后面为对应数据源<br> 注意两种刷新都是基于 数据源为同一个 数据源不同不咬用刷新
+    </div>
+    <button id='refresh' class="btn btn-primary">刷新</button>
+</body>
+
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="Transfer.js"></script>
+
+<!-- 中间点击按钮图标没显示出来没关系  是因为引入的cdn问题  正常下载引入bootstrap.css的话没问题的 -->
+<!-- 此处演示的数据源为一个 用falg去区分在哪个里面 -->
+<script type="text/javascript">
+    $('#transferContainer').transfer({
+        titles: ['待选对比档案', '已选对比档案'],
+        search: true,
+        uniqueId: "importUnitId", //唯一id
+        url: 'data.json',
+        maxSelect: 6,
+        diffKey: 'flag',
+        unselectColumns: [{
+            field: 'flag',
+            checkbox: true
+        }, {
+            field: 'importUnitName',
+            title: '档案名称'
+        }]
+    });
+
+    $('#btn').click(function() {
+        var data = $('#transferContainer').transfer('getData', 'selectData', 'importUnitId');
+        console.log(data)
+    })
+
+    $('#refresh').click(function() {
+        $('#transferContainer').transfer('refresh')
+    })
+</script>

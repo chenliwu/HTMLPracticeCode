@@ -1,0 +1,30 @@
+{
+    "data": [{
+
+        "importUnitId": "950258484706803712",
+        "importUnitName": "分数对比2016",
+        "flag": false
+
+    }, {
+        "importUnitId": "949202813861232640",
+        "importUnitName": "对比1",
+        "flag": false
+    }, {
+        "importUnitId": "948380218236600320",
+        "importUnitName": "测试2",
+        "flag": false
+    }, {
+        "importUnitId": "946590730653007872",
+        "importUnitName": "对比4",
+        "flag": false
+    }, {
+        "importUnitId": "946590730653007889",
+        "importUnitName": "对比954",
+        "flag": true
+    }, {
+        "importUnitId": "946590730653008647",
+        "importUnitName": "对比88",
+        "flag": true
+    }],
+    "success": true
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.css" rel="stylesheet"> -->
+
+
+
+    <link rel="stylesheet" href="../../bootstrap-3.3.7-dist/css/bootstrap.css">
+
+    <script src="../../js/jquery-2.1.0.min.js"></script>
+    <script src="../../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- 引入bootstrap-table -->
+    <link href="./bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="./bootstrap-table/dist/bootstrap-table-locale-all.min.js"></script>
+    <script src="./bootstrap-table/dist/bootstrap-table.min.js"></script>
+
+    <link href="./tranfer.css" rel="stylesheet">
+    <script src="Transfer.js"></script>
+</head>
+
+<body>
+    <h2>数据源为两个 时的刷新</h2>
+    <div id="transferContainer" class="row" style="height: 700px;width: 950px;"></div>
+    <div>
+        中间点击按钮图标没显示出来没关系 是因为引入的cdn问题 正常下载引入bootstrap.css的话没问题<br> 'getData' 内置方法 selectData是获取选中的数据 后面importUnitId
+        是收集的字段 如果需要收集多个字段就改为数组<br> $('#transferContainer').transfer('getData', 'selectData', 'importUnitId')
+    </div>
+    <h3>数据在后台 coonsole中查看</h3>
+    <button id='btn' class="btn btn-primary">获取已选数据</button>
+    <button id='btn2' class="btn btn-primary">刷新待选数据</button>
+</body>
+
+</html>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="Transfer.js"></script> -->
+
+<!-- 中间点击按钮图标没显示出来没关系  是因为引入的cdn问题  正常下载引入bootstrap.css的话没问题的 -->
+<!-- 此处演示的数据源为一个 用falg去区分在哪个里面 -->
+<script type="text/javascript">
+    var data = [{
+
+        "importUnitId": "950258484706803712",
+        "importUnitName": "分数对比2016",
+
+    }, {
+        "importUnitId": "949202813861232640",
+        "importUnitName": "对比1",
+    }, {
+        "importUnitId": "948380218236600320",
+        "importUnitName": "测试2",
+    }, {
+        "importUnitId": "946590730653007872",
+        "importUnitName": "对比4",
+    }, {
+        "importUnitId": "946590730653007889",
+        "importUnitName": "对比954",
+    }, {
+        "importUnitId": "946590730653008647",
+        "importUnitName": "对比88",
+    }]
+    var data1 = [{
+
+        "importUnitId": "950258484706803712",
+        "importUnitName": "分数对比2016",
+
+    }, {
+        "importUnitId": "949202813861232640",
+        "importUnitName": "对比1",
+    }, {
+
+        "importUnitId": "95025848470680372344",
+        "importUnitName": "分数对比qwewe",
+
+    }, {
+        "importUnitId": "949202813861234342640",
+        "importUnitName": "对比eqwe",
+    }, {
+        "importUnitId": "948380215823660033320",
+        "importUnitName": "测试qwe",
+    }, {
+        "importUnitId": "946590730653663007872",
+        "importUnitName": "对比gdfgdfg",
+    }, {
+        "importUnitId": "94659073065303407889",
+        "importUnitName": "asdsd",
+    }, {
+        "importUnitId": "94659073065306708647",
+        "importUnitName": "对比8787",
+    }]
+
+
+
+    $('#transferContainer').transfer({
+        titles: ['待选对比档案', '已选对比档案'],
+        search: true,
+        uniqueId: "importUnitId", //唯一id
+        dataSource: data,
+        selectdataSource: [],
+        unselectColumns: [{
+            field: 'flag',
+            checkbox: true
+        }, {
+            field: 'importUnitName',
+            title: '档案名称'
+        }]
+    });
+
+    $('#btn').click(function () {
+        var data = $('#transferContainer').transfer('getData', 'selectData', 'importUnitId');
+        console.log(data)
+    })
+
+    $('#btn2').click(function () {
+        $('#transferContainer').transfer('refreshLeft', data1);
+
+    })
+</script>
