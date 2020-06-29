@@ -110,6 +110,10 @@
 
 
     window.onload = function () {
+
+    }
+
+    function testAesCbc() {
         console.log("onload...");
         const data = "hello world";
         const encrypted = aesEncrypt(data, AES_KEY, AES_IV);
@@ -123,6 +127,7 @@
         console.log("加密字符串：", encrypted_1 + '');
         console.log("解密字符串：", aesDecrypt_1(encrypted_1, AES_KEY, AES_IV));
     }
+
 </script>
 
 </body>

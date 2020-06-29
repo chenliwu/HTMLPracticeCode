@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="showCryptDataElement">
+
+</div>
+
+
+<script src="crypto-js-3.1.9-1/crypto-js.js"></script>
+<script>
+
+    let AES_KEY = "1234567812345678";
+    let AES_IV = "1234567812345678";
+
+
+    /**
+     * 定义加密函数
+     * @param {string} data - 需要加密的数据, 传过来前先进行 JSON.stringify(data);
+     * @param {string} key - 加密使用的 key
+     * @param {string} iv - 加密使用的 iv
+     */
+    const aesEncrypt = (data, key, iv) => {
+        /**
+         * CipherOption, 加密的一些选项:
+         *   mode: 加密模式, 可取值(CBC, CFB, CTR, CTRGladman, OFB, ECB), 都在 CryptoJS.mode 对象下
+         *   padding: 填充方式, 可取值(Pkcs7, AnsiX923, Iso10126, Iso97971, ZeroPadding, NoPadding), 都在 CryptoJS.pad 对象下
+         *   iv: 偏移量, mode === ECB 时, 不需要 iv
+         * 返回的是一个加密对象
+         */
+        const keyTemp = CryptoJS.enc.Utf8.parse(key);
+        const ivTemp = CryptoJS.enc.Utf8.parse(iv);
+        const encrypted = CryptoJS.AES.encrypt(data, keyTemp, {
+            iv: ivTemp,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        // 返回base64加密字符串
+        return encrypted + '';
+    };
+
+    /**
+     * 定义解密函数
+     * @param {string} encrypted - 加密的数据;
+     * @param {string} key - 加密使用的 key
+     * @param {string} iv - 加密使用的 iv
+     */
+    const aesDecrypt = (encrypted, key, iv) => {
+        const keyTemp = CryptoJS.enc.Utf8.parse(key);
+        const ivTemp = CryptoJS.enc.Utf8.parse(iv);
+        const decrypt = CryptoJS.AES.decrypt(encrypted, keyTemp, {
+            iv: ivTemp,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+        return decryptedStr.toString();
+    };
+
+
+    window.onload = function () {
+        testDecryptJavaData();
+    }
+
+    /**
+     *  使用CryptoJS解密java端AES-CBC加密的数据
+     */
+    function testDecryptJavaData() {
+        // hello world
+        const encryptData = "a2SpM37nvVYtBnVHonX86w==";
+        const decryptData = aesDecrypt(encryptData, AES_KEY, AES_IV);
+        console.log("解密的数据：", decryptData);
+    }
+
+
+</script>
+
+</body>
+</html>
