@@ -64,6 +64,8 @@
 
     window.onload = function () {
         testDecryptJavaData();
+
+        testDecryptJavaData_1();
     }
 
     /**
@@ -73,6 +75,16 @@
         // hello world
         const encryptData = "a2SpM37nvVYtBnVHonX86w==";
         const decryptData = aesDecrypt(encryptData, AES_KEY, AES_IV);
+        console.log("解密的数据：", decryptData);
+    }
+
+    /**
+     *  使用CryptoJS解密java端AES-CBC加密的数据
+     */
+    function testDecryptJavaData_1() {
+        const ivString = 'GSuu3f7izY6CgR23';
+        const encryptData = "vf/R0cIdn+kGgPivYTCMfLY2hx+DawtyPSdkGEW+qIMklqFe3IXEKbm9K+BQ76AJ";
+        const decryptData = aesDecrypt(encryptData, AES_KEY, ivString);
         console.log("解密的数据：", decryptData);
     }
 
