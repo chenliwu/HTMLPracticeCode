@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iframe内嵌页面</title>
+</head>
+<body>
+
+<div>
+    <h2>Iframe内嵌页面</h2>
+
+    <div>
+        <button onclick="callInjectJsMethod()">调用父页面注入的JS脚本</button>
+    </div>
+
+</div>
+
+<script>
+
+    testMethod = function () {
+        alert("Iframe内嵌页面-测试方法");
+    }
+
+    callInjectJsMethod = function () {
+        APPBridge && APPBridge.post();
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iframe框架</title>
+</head>
+<body>
+
+
+<iframe
+        id="iframeElement"
+        src="./IframePage.html"
+></iframe>
+
+
+<script>
+
+    const INJECT_JS = `
+        window.APPBridge = {
+            post: function(){
+                alert('APPBridge.post');
+            }
+        };
+    `;
+
+    const iframeElement = document.getElementById("iframeElement");
+
+    //创建一个script标签
+    function loadScriptString(iframeDocument, code) {
+        let script = iframeDocument.createElement("script");  //创建一个script标签
+        script.type = "text/javascript";
+        try {
+            //IE浏览器认为script是特殊元素,不能再访问子节点;报错;
+            script.appendChild(iframeDocument.createTextNode(code));
+        } catch (ex) {
+            script.text = code;
+        }
+        iframeDocument.getElementsByTagName('head')[0].appendChild(script);
+    }
+
+
+    window.onload = function () {
+        const contentWindow = iframeElement.contentWindow;
+        const iframeDocument = iframeElement.contentWindow.document;
+        // 调用iframe页面的JS 方法
+        // contentWindow.testMethod && contentWindow.testMethod();
+
+        loadScriptString(iframeDocument, INJECT_JS);
+
+        // iframeElement.srcdoc = INJECT_JS;
+        console.log("contentWindow", iframeElement.contentWindow);
+        console.log("contentWindow.document", iframeElement.contentWindow.document);
+        console.log("iframeElement.srcdoc", iframeElement.srcdoc);
+    }
+
+</script>
+
+</body>
+</html>
