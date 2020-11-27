@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <tbody>
+            <tr>
+                <th>111</th>
+                <th>222</th>
+            </tr>
+            <tr>
+                <th>   111</th>
+                <th>   222</th>
+            </tr>
+            <tr>
+                <th id="testShowElement1"></th>
+                <th>222</th>
+            </tr>
+            <tr>
+                <th id="testShowElement2"></th>
+                <th>222</th>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script src="./js/jquery-2.1.0.min.js"></script>
+<script>
+    window.onload = function () {
+        var str="   111";
+        console.log(str.replace(/ /g,"&nbsp;"));
+        $("#testShowElement1").html(str.replace(/ /g,"&nbsp;"));
+        $("#testShowElement2").html("&nbsp;&nbsp;&nbsp;111");
+    }
+
+    var HtmlUtil = {
+        /*1.用浏览器内部转换器实现html编码（转义）*/
+        htmlEncode:function (html){
+            //1.首先动态创建一个容器标签元素，如DIV
+            var temp = document.createElement ("div");
+            //2.然后将要转换的字符串设置为这个元素的innerText或者textContent
+            (temp.textContent != undefined ) ? (temp.textContent = html) : (temp.innerText = html);
+            //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+            var output = temp.innerHTML;
+            temp = null;
+            return output;
+        },
+        /*2.用浏览器内部转换器实现html解码（反转义）*/
+        htmlDecode:function (text){
+            //1.首先动态创建一个容器标签元素，如DIV
+            var temp = document.createElement("div");
+            //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+            temp.innerHTML = text;
+            //3.最后返回这个元素的innerText或者textContent，即得到经过HTML解码的字符串了。
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        },
+        /*3.用正则表达式实现html编码（转义）*/
+        htmlEncodeByRegExp:function (str){
+            var temp = "";
+            if(str.length == 0) return "";
+            temp = str.replace(/&/g,"&");
+            temp = temp.replace(/</g,"<");
+            temp = temp.replace(/>/g,">");
+            temp = temp.replace(/\s/g," ");
+            temp = temp.replace(/\'/g,"'");
+            temp = temp.replace(/\"/g,"");
+            return temp;
+        },
+        /*4.用正则表达式实现html解码（反转义）*/
+        htmlDecodeByRegExp:function (str){
+            var temp = "";
+            if(str.length == 0) return "";
+            temp = str.replace(/&/g,"&");
+            temp = temp.replace(/</g,"<");
+            temp = temp.replace(/>/g,">");
+            temp = temp.replace(/ /g," ");
+            temp = temp.replace(/'/g,"\'");
+            temp = temp.replace(/"/g,"\"");
+            return temp;
+        },
+        /*5.用正则表达式实现html编码（转义）（另一种写法）*/
+        html2Escape:function(sHtml) {
+            return sHtml.replace(/[<>&"]/g,function(c){return {'<':'<','>':'>','&':'&','"':'"'}[c];});
+        },
+        /*6.用正则表达式实现html解码（反转义）（另一种写法）*/
+        escape2Html:function (str) {
+            var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+            return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+        }
+    };
+
+</script>
+</html>
